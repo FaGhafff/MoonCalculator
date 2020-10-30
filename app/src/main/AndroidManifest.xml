@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MoonCalculator">
-        <activity android:name=".MainActivity">
+        <activity android:name=".AboutUsActivity"></activity>
+        <activity android:name=".ThemeActivity" />
+        <activity android:name=".HistoryActivity" />
+        <activity android:name=".ConvertorActivity" />
+        <activity android:name=".MenuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

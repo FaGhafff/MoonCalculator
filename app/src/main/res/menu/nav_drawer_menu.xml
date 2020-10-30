@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:title="Home"
+        android:icon="@drawable/ic_home"
+        android:onClick="onClickHome"
+        />
+    <item
+        android:id="@+id/converter"
+        android:title="Converter"
+        android:onClick="onClickConverter"/>
+    <item
+        android:id="@+id/ourWebsite"
+        android:title="Oue Website"
+        android:onClick="onClickOurWebsite"/>
+    <item
+        android:id="@+id/history"
+        android:title="History"
+        android:onClick="onClickHistory"/>
+    <item
+        android:id="@+id/themes"
+        android:title="Themes"
+        android:onClick="onClickThemes"/>
+    <item
+        android:id="@+id/aboutUs"
+        android:title="About us"
+        android:onClick="onClickAboutUs"/>
+    <item
+        android:id="@+id/exit"
+        android:title="Exit"
+        android:onClick="onClickExit"/>
+
+</menu>
