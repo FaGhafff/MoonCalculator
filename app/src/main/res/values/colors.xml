@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFC107</color>//range buttn ha vagti darke
+    <color name="purple_200">#262930</color>//range buttn ha vagti darke
     <color name="purple_500">#262930</color>//buttun ha
     <color name="purple_700">#000000</color>//balaye safhe
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#950707</color>//rang vagti darke text
+    <color name="black">#C6BDBD</color>//rang vagti darke text
     <color name="white">#DFDBDB</color>/text ha
     <color name="yellow">#F4AB41</color>
 </resources>
