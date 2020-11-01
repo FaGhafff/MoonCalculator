@@ -2,4 +2,24 @@
     <string name="app_name">Moon Calculator</string>
     <string name="open">open</string>
     <string name="close">close</string>
+    <string name="title_activity_nav">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    //written by @ali
+    <string name="accelerationFragmentTitle">Acceleration</string>
+    <string name="angleFragmentTitle">Angle</string>
+    <string name="areaFragmentTitle">Area</string>
+    <string name="dataStorageFragmentTitle">DataStorage</string>
+    <string name="dataTransferRateFragmentTitle">DataTransfer Rate</string>
+    <string name="energyFragmentTitle">Energy</string>
+    <string name="forceFragmentTitle">Force</string>
+    <string name="lengthFragmentTitle">Length</string>
+    <string name="massFragmentTitle">Mass</string>
+    <string name="speedFragmentTitle">Speed</string>
+    <string name="timeFragmentTitle">Time</string>
 </resources>
