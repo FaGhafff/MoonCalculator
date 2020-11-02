@@ -8,4 +8,5 @@
     <color name="black">#C6BDBD</color>//rang vagti darke text
     <color name="white">#DFDBDB</color>/text ha
     <color name="yellow">#F4AB41</color>
+    <color name="transparent">#00000000</color>
 </resources>

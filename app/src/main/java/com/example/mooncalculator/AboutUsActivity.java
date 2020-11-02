@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -23,6 +24,8 @@ public class AboutUsActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.nav_view);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
@@ -34,6 +37,7 @@ public class AboutUsActivity extends AppCompatActivity {
             return true;
         });
 
+
     }
 
     @Override
@@ -44,7 +48,7 @@ public class AboutUsActivity extends AppCompatActivity {
     }
 
     public void onClickHome(MenuItem item) {
-        Statics.redirectActivity(this, MenuActivity.class);
+        Statics.redirectActivity(this, MainActivity.class);
     }
 
     public void onClickConverter(MenuItem item) {
@@ -79,4 +83,8 @@ public class AboutUsActivity extends AppCompatActivity {
         super.onPause();
     }
 
+    @Override
+    public void onBackPressed() {
+        Statics.showExitDialog(this,drawerLayout);
+    }
 }

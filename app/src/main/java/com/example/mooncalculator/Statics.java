@@ -2,10 +2,7 @@ package com.example.mooncalculator;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 public class Statics {
@@ -24,7 +21,7 @@ public class Statics {
 
     public static void redirectActivity(Activity activity, Class<?> aClass) {
         Intent intent = new Intent(activity, aClass);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_TASK_ON_HOME);
         activity.startActivity(intent);
     }
 
