@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MoonCalculator">
-        <activity android:name=".AboutUsActivity"></activity>
+        <activity android:name=".AboutUsActivity" />
         <activity android:name=".ThemeActivity" />
         <activity android:name=".HistoryActivity" />
         <activity android:name=".ConvertorActivity" />
