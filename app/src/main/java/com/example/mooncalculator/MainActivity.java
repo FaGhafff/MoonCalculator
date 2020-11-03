@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.viewpager.widget.ViewPager;
 
 import org.mariuszgromada.math.mxparser.*;
 
@@ -15,7 +16,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.mooncalculator.Fragments.Converter.AccelerationFragment;
+import com.example.mooncalculator.Fragments.Converter.AngleFragment;
+import com.example.mooncalculator.Fragments.Converter.AreaFragment;
+import com.example.mooncalculator.Fragments.Converter.DataStorageFragment;
+import com.example.mooncalculator.Fragments.Converter.DataTransferRateFragment;
+import com.example.mooncalculator.Fragments.Converter.EnergyFragment;
+import com.example.mooncalculator.Fragments.Converter.ForceFragment;
+import com.example.mooncalculator.Fragments.Converter.LengthFragment;
+import com.example.mooncalculator.Fragments.Converter.MassFragment;
+import com.example.mooncalculator.Fragments.Converter.SpeedFragment;
+import com.example.mooncalculator.Fragments.Converter.TimeFragment;
+import com.example.mooncalculator.Fragments.Main.BasicFragment;
+import com.example.mooncalculator.Fragments.Main.EquationFragment;
+import com.example.mooncalculator.Fragments.Main.ExpertFragment;
 import com.google.android.material.navigation.NavigationView;
+import com.ogaclejapan.smarttablayout.SmartTabLayout;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -31,9 +49,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //drawer
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.nav_view);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
@@ -41,6 +60,24 @@ public class MainActivity extends AppCompatActivity {
         toggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //tab view
+        FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(
+                getSupportFragmentManager(), FragmentPagerItems.with(this)
+                .add(R.string.expertFragmentTitle, ExpertFragment.class)
+                .add(R.string.basicFragmentTitle, BasicFragment.class)
+                .add(R.string.equationFragmentTitle, EquationFragment.class)
+                .create());
+
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager.setAdapter(adapter);
+
+        SmartTabLayout viewPagerTab = (SmartTabLayout) findViewById(R.id.viewpagertab);
+        viewPagerTab.setViewPager(viewPager);
+
+
+
+
+        //calculator
         display = findViewById(R.id.input);
         display.setShowSoftInputOnFocus(false);
         display.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (toggle.onOptionsItemSelected(item))
@@ -130,9 +168,9 @@ public class MainActivity extends AppCompatActivity {
     private int hideSystemBars() {
         return View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                 | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                 | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
     }
 

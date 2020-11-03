@@ -24,7 +24,6 @@
     <string name="display">Enter in a value </string>
 
 
-
     <string name="open">open</string>
     <string name="close">close</string>
     <string name="title_activity_nav">MainActivity</string>
@@ -36,6 +35,7 @@
 
 
     //written by @ali
+    //converter
     <string name="accelerationFragmentTitle">Acceleration</string>
     <string name="angleFragmentTitle">Angle</string>
     <string name="areaFragmentTitle">Area</string>
@@ -47,4 +47,10 @@
     <string name="massFragmentTitle">Mass</string>
     <string name="speedFragmentTitle">Speed</string>
     <string name="timeFragmentTitle">Time</string>
+    //main
+    <string name="basicFragmentTitle">Basic</string>
+    <string name="expertFragmentTitle">Expert</string>
+    <string name="equationFragmentTitle">Equation</string>
+
+    <string name="title_activity_main2">MainActivity</string>
 </resources>
