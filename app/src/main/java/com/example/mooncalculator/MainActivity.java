@@ -68,10 +68,10 @@ public class MainActivity extends AppCompatActivity {
                 .add(R.string.equationFragmentTitle, EquationFragment.class)
                 .create());
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewPagerMain);
         viewPager.setAdapter(adapter);
 
-        SmartTabLayout viewPagerTab = (SmartTabLayout) findViewById(R.id.viewpagertab);
+        SmartTabLayout viewPagerTab = (SmartTabLayout) findViewById(R.id.viewPagerTabMain);
         viewPagerTab.setViewPager(viewPager);
 
 

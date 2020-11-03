@@ -72,10 +72,10 @@ public class ConvertorActivity extends AppCompatActivity {
                 .add(R.string.timeFragmentTitle, TimeFragment.class)
                 .create());
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewPagerConverter);
         viewPager.setAdapter(adapter);
 
-        SmartTabLayout viewPagerTab = (SmartTabLayout) findViewById(R.id.viewpagertab);
+        SmartTabLayout viewPagerTab = (SmartTabLayout) findViewById(R.id.viewPagerTabConverter);
         viewPagerTab.setViewPager(viewPager);
 
     }
