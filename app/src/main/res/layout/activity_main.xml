@@ -11,6 +11,33 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/Theme.MoonCalculator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:minHeight="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title=""
+            tools:layout_editor_absoluteX="0dp">
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <EditText
+            android:id="@+id/input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="-1dp"
+            android:autofillHints="false"
+            android:inputType="none"
+            android:text="@string/display"
+            android:textAlignment="textEnd"
+            android:textSize="36sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewpager"
             android:layout_width="wrap_content"
@@ -18,7 +45,7 @@
             app:layout_constraintBottom_toTopOf="@+id/viewpagertab"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+            app:layout_constraintTop_toBottomOf="@+id/input">
 
         </androidx.viewpager.widget.ViewPager>
 
@@ -59,18 +86,7 @@
 
         </com.ogaclejapan.smarttablayout.SmartTabLayout>
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            style="@style/Theme.MoonCalculator"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/transparent"
-            android:minHeight="?attr/actionBarSize"
-            app:layout_constraintTop_toTopOf="parent"
-            app:title=""
-            tools:layout_editor_absoluteX="0dp">
 
-        </androidx.appcompat.widget.Toolbar>
 
 <!--        <EditText-->
 <!--            android:id="@+id/input"-->

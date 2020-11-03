@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         //tab view
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(
                 getSupportFragmentManager(), FragmentPagerItems.with(this)
-                .add(R.string.expertFragmentTitle, ExpertFragment.class)
+                .add(R.string.expertFragmentTitle,ExpertFragment.class)
                 .add(R.string.basicFragmentTitle, BasicFragment.class)
                 .add(R.string.equationFragmentTitle, EquationFragment.class)
                 .create());
