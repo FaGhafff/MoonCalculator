@@ -16,17 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.mooncalculator.Fragments.Converter.AccelerationFragment;
-import com.example.mooncalculator.Fragments.Converter.AngleFragment;
-import com.example.mooncalculator.Fragments.Converter.AreaFragment;
-import com.example.mooncalculator.Fragments.Converter.DataStorageFragment;
-import com.example.mooncalculator.Fragments.Converter.DataTransferRateFragment;
-import com.example.mooncalculator.Fragments.Converter.EnergyFragment;
-import com.example.mooncalculator.Fragments.Converter.ForceFragment;
-import com.example.mooncalculator.Fragments.Converter.LengthFragment;
-import com.example.mooncalculator.Fragments.Converter.MassFragment;
-import com.example.mooncalculator.Fragments.Converter.SpeedFragment;
-import com.example.mooncalculator.Fragments.Converter.TimeFragment;
 import com.example.mooncalculator.Fragments.Main.BasicFragment;
 import com.example.mooncalculator.Fragments.Main.EquationFragment;
 import com.example.mooncalculator.Fragments.Main.ExpertFragment;
@@ -67,12 +56,13 @@ public class MainActivity extends AppCompatActivity {
                 .add(R.string.basicFragmentTitle, BasicFragment.class)
                 .add(R.string.equationFragmentTitle, EquationFragment.class)
                 .create());
-
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewPagerMain);
         viewPager.setAdapter(adapter);
-
+        viewPager.setCurrentItem(1);
         SmartTabLayout viewPagerTab = (SmartTabLayout) findViewById(R.id.viewPagerTabMain);
         viewPagerTab.setViewPager(viewPager);
+
+
 
 
 
