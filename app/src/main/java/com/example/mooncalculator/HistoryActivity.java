@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -26,6 +27,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
@@ -40,6 +42,8 @@ public class HistoryActivity extends AppCompatActivity {
     private RecyclerAdapter recyclerAdapter;
     private List<String> data;
 
+    private SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,29 +57,19 @@ public class HistoryActivity extends AppCompatActivity {
         toggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         navigationView.setNavigationItemSelectedListener(item -> {
-
             Toast.makeText(this, item.getTitle().toString(), Toast.LENGTH_SHORT).show();
             return true;
         });
-
-        //get data from sharedpref
-//        SharedPreferences sharedPreferences = getSharedPreferences("history",MODE_PRIVATE);
-//        Map<String,String> data = (Map<String, String>) sharedPreferences.getAll();
-
-        data = new ArrayList<>();
-
-        //some EXs
-        data.add("12+12+12");
-        data.add("I love you fati");
-        data.add("you are very beautiful");
-
-        //
-
+        sharedPreferences = getSharedPreferences("SPHistory",MODE_PRIVATE);
+        //set some ex
+        Statics.saveExpression(sharedPreferences,"fati");
+        Statics.saveExpression(sharedPreferences,"ali");
+        Statics.saveExpression(sharedPreferences,"123");
+        Statics.saveExpression(sharedPreferences,"1233");
+        data = Statics.getHistoryData(sharedPreferences);
         recyclerView = findViewById(R.id.historyRecyclerView);
         recyclerAdapter = new RecyclerAdapter(data);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         recyclerView.setAdapter(recyclerAdapter);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
@@ -171,9 +165,15 @@ public class HistoryActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        System.out.println(this.getLocalClassName());
         drawerLayout.closeDrawers();
+        Statics.updateDataSP(sharedPreferences,data);
         super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Statics.updateDataSP(sharedPreferences,data);
+        super.onDestroy();
     }
 
     @Override
