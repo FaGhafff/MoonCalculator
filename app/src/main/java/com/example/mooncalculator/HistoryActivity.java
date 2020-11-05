@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -15,11 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.QuickContactBadge;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -27,7 +26,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 public class HistoryActivity extends AppCompatActivity {
 
@@ -86,7 +86,7 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
 
-    String deletedExpression = null;
+    String selectedRow = null;
     ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT |
             ItemTouchHelper.RIGHT) {
         @Override
@@ -97,25 +97,39 @@ public class HistoryActivity extends AppCompatActivity {
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
             final int position = viewHolder.getAdapterPosition();
+            selectedRow = data.get(position);
             switch (direction) {
                 case ItemTouchHelper.LEFT:
-                    deletedExpression=data.get(position);
                     data.remove(position);
                     recyclerAdapter.notifyItemRemoved(position);
-                    Snackbar.make(recyclerView,deletedExpression,Snackbar.LENGTH_LONG).setAction("Undo", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            data.add(position,deletedExpression);
-                            recyclerAdapter.notifyItemInserted(position);
-                        }
+                    Snackbar.make(recyclerView, selectedRow, Snackbar.LENGTH_LONG).setAction("Undo", view -> {
+                        data.add(position, selectedRow);
+                        recyclerAdapter.notifyItemInserted(position);
                     }).show();
                     break;
                 case ItemTouchHelper.RIGHT:
                     ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                    ClipData clip = ClipData.newPlainText("text","texttext");
+                    ClipData clip = ClipData.newPlainText("text", data.get(position).toString());
                     clipboard.setPrimaryClip(clip);
+                    data.remove(position);
+                    recyclerAdapter.notifyItemRemoved(position);
+                    data.add(position, selectedRow);
+                    recyclerAdapter.notifyItemInserted(position);
+                    Snackbar.make(recyclerView, "Expression Copied to clipboard !", Snackbar.LENGTH_SHORT).show();
                     break;
             }
+        }
+
+        @Override
+        public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+            new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                    .addSwipeLeftBackgroundColor(ContextCompat.getColor(HistoryActivity.this, R.color.swipeLeftBackground))
+                    .addSwipeLeftActionIcon(R.drawable.ic_sharp_delete_sweep_24)
+                    .addSwipeRightBackgroundColor(ContextCompat.getColor(HistoryActivity.this, R.color.swipeRightBackground))
+                    .addSwipeRightActionIcon(R.drawable.ic_sharp_content_copy_24).create()
+                    .decorate();
+
+            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
         }
     };
 
