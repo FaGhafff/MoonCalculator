@@ -7,6 +7,9 @@ import android.content.SharedPreferences;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -14,12 +17,14 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Statics {
+
     public static void showExitDialog(Activity activity, DrawerLayout drawerLayout) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle("Exit")
                 .setMessage("Are you sure want to Exit ?!")
                 .setPositiveButton("YES", (dialogInterface, i) -> {
                     activity.finishActivity(0);
+                    activity.finish();
                     System.exit(0);
                 }).setNegativeButton("NO", (dialogInterface, i) -> {
             drawerLayout.closeDrawers();
@@ -33,7 +38,7 @@ public class Statics {
         activity.startActivity(intent);
     }
 
-    public static void saveExpression(SharedPreferences sharedPreferences, String expression) {
+    public static void saveExpression(@NotNull SharedPreferences sharedPreferences, String expression) {
         Map<String,String> map = (Map<String, String>) sharedPreferences.getAll();
         int lastIndex = 0;
         if (!map.isEmpty()) {
@@ -44,10 +49,14 @@ public class Statics {
         editor.putString(String.valueOf(++lastIndex),expression);
         editor.apply();
     }
-    public static List<String> getHistoryData(SharedPreferences sharedPreferences){
-        return new ArrayList<String>((Collection<? extends String>) sharedPreferences.getAll().values());
+
+    @NotNull
+    @Contract("_ -> new")
+    public static List<String> getHistoryData(@NotNull SharedPreferences sharedPreferences){
+        return new ArrayList<>((Collection<? extends String>) sharedPreferences.getAll().values());
     }
-    public static void updateDataSP(SharedPreferences sharedPreferences,List<String> data){
+
+    public static void updateDataSP(@NotNull SharedPreferences sharedPreferences, @NotNull List<String> data){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         AtomicInteger index = new AtomicInteger(0);
         editor.clear();
@@ -55,5 +64,4 @@ public class Statics {
             editor.putString(String.valueOf(index.getAndIncrement()),str);
         editor.apply();
     }
-
 }
