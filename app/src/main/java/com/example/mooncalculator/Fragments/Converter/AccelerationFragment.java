@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.example.mooncalculator.R;
 
@@ -48,6 +51,8 @@ public class AccelerationFragment extends Fragment {
         return fragment;
     }
 
+    private Spinner spinner;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,12 +60,41 @@ public class AccelerationFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        System.out.println("onCreate baby");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_acceleration, container, false);
+        spinner = view.findViewById(R.id.spinner);
+        String[] from = getResources().getStringArray(R.array.Time);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, from);
+        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        spinner.setOnItemSelectedListener(listener);
+        spinner.setAdapter(adapter);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_acceleration, container, false);
+        return view;
     }
+
+
+    AdapterView.OnItemSelectedListener listener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            System.err.println("fuck of");
+            System.out.println(adapterView.getSelectedItemPosition());
+            System.out.println(adapterView.getSelectedItemId());
+            System.out.println(adapterView.getSelectedItem().toString());
+            if (adapterView.getSelectedItemId() == R.id.spinner) {
+                System.err.println("item selected");
+                System.out.println(adapterView.getItemAtPosition(i).toString());
+            }
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+            System.out.println("babauabauuba");
+        }
+    };
 }

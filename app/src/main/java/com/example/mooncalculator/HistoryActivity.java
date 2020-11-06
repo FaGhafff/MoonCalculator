@@ -56,16 +56,20 @@ public class HistoryActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //fixme no need for NavItemSelectedListener
         navigationView.setNavigationItemSelectedListener(item -> {
             Toast.makeText(this, item.getTitle().toString(), Toast.LENGTH_SHORT).show();
             return true;
         });
         sharedPreferences = getSharedPreferences("SPHistory",MODE_PRIVATE);
+
         //set some ex
         Statics.saveExpression(sharedPreferences,"fati");
         Statics.saveExpression(sharedPreferences,"ali");
         Statics.saveExpression(sharedPreferences,"123");
         Statics.saveExpression(sharedPreferences,"1233");
+
         data = Statics.getHistoryData(sharedPreferences);
         recyclerView = findViewById(R.id.historyRecyclerView);
         recyclerAdapter = new RecyclerAdapter(data);

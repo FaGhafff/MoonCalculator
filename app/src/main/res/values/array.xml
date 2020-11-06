@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Area">
+        <item>Acres</item>
+        <item>Ares</item>
+        <item>Hectares</item>
+        <item>SquareCentimeters</item>
+        <item>SquareFeet</item>
+        <item>SquareInches</item>
+        <item>SquareKilometers</item>
+        <item>SquareMeters</item>
+        <item>SquareMiles</item>
+    </string-array>
+    <string-array name="Length">
+        <item>Millimeters</item>
+        <item>Centimetres</item>
+        <item>Metres</item>
+        <item>Kilometres</item>
+        <item>Inches</item>
+        <item>Feet</item>
+        <item>Yard</item>
+        <item>Miles</item>
+        <item>Nautical miles</item>
+        <item>Mils</item>
+    </string-array>
+    <string-array name="Temperature">
+        <item>Celsius</item>
+        <item>Fahrenheit</item>
+        <item>Kelvin</item>
+    </string-array>
+    <string-array name="Volume">
+        <item>UK gallons</item>
+        <item>US gallons</item>
+        <item>Litres</item>
+        <item>Millilitres</item>
+        <item>Cubic centimetres</item>
+        <item>Cubic metres</item>
+        <item>Cubic inches</item>
+        <item>Cubic feet</item>
+    </string-array>
+    <string-array name="Mass">
+        <item>Tons</item>
+        <item>UK tons</item>
+        <item>US tons</item>
+        <item>Pounds</item>
+        <item>Ounces</item>
+        <item>Kilograms</item>
+        <item>Grams</item>
+    </string-array>
+    <string-array name="Data">
+        <item>Bits</item>
+        <item>Bytes</item>
+        <item>Kilobytes</item>
+        <item>Megabytes</item>
+        <item>Gigabytes</item>
+        <item>Terabytes</item>
+    </string-array>
+    <string-array name="Speed">
+        <item>Meter per second</item>
+        <item>Meter per hour</item>
+        <item>Kilometres per second</item>
+        <item>Kilometres per hour</item>
+        <item>Inches per second</item>
+        <item>Inches per hour</item>
+        <item>Feet per second</item>
+        <item>Feet per hour</item>
+        <item>Miles per second</item>
+        <item>Miles per hour</item>
+        <item>Knots</item>
+    </string-array>
+    <string-array name="Time">
+        <item>Milliseconds</item>
+        <item>Seconds</item>
+        <item>Minutes</item>
+        <item>Hours</item>
+        <item>Days</item>
+        <item>Weeks</item>
+    </string-array>
+    <string-array name="Notation">
+        <item>Infix</item>
+        <item>Prefix</item>
+        <item>Postfix</item>
+    </string-array>
+</resources>
