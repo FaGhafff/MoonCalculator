@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="Area">
-        <item>Acres</item>
-        <item>Ares</item>
-        <item>Hectares</item>
-        <item>SquareCentimeters</item>
-        <item>SquareFeet</item>
-        <item>SquareInches</item>
-        <item>SquareKilometers</item>
-        <item>SquareMeters</item>
-        <item>SquareMiles</item>
+        <item>Acres (ac)</item>
+        <item>Ares (a)</item>
+        <item>Hectares (ha)</item>
+        <item>Square Centimeters (cm<sup><small>2</small></sup>)</item>
+        <item>Square Feet (ft<sup>2</sup>)</item>
+        <item>Square Inches (in<sup>2</sup>)</item>
+        <item>Square Meters (m<sup>2</sup>)</item>
     </string-array>
     <string-array name="Length">
         <item>Millimeters</item>

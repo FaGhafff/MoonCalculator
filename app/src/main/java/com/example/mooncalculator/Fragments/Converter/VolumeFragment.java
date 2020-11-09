@@ -12,10 +12,10 @@ import com.example.mooncalculator.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link DataTransferRateFragment#newInstance} factory method to
+ * Use the {@link VolumeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DataTransferRateFragment extends Fragment {
+public class VolumeFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class DataTransferRateFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public DataTransferRateFragment() {
+    public VolumeFragment() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class DataTransferRateFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment DataTransferRateFragment.
+     * @return A new instance of fragment EnergyFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DataTransferRateFragment newInstance(String param1, String param2) {
-        DataTransferRateFragment fragment = new DataTransferRateFragment();
+    public static VolumeFragment newInstance(String param1, String param2) {
+        VolumeFragment fragment = new VolumeFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class DataTransferRateFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_data_transfer_rate, container, false);
+        return inflater.inflate(R.layout.fragment_volume, container, false);
     }
 }

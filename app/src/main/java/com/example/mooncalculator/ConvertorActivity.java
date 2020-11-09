@@ -13,13 +13,10 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.mooncalculator.Fragments.Converter.AccelerationFragment;
-import com.example.mooncalculator.Fragments.Converter.AngleFragment;
 import com.example.mooncalculator.Fragments.Converter.AreaFragment;
 import com.example.mooncalculator.Fragments.Converter.DataStorageFragment;
-import com.example.mooncalculator.Fragments.Converter.DataTransferRateFragment;
-import com.example.mooncalculator.Fragments.Converter.EnergyFragment;
-import com.example.mooncalculator.Fragments.Converter.ForceFragment;
+import com.example.mooncalculator.Fragments.Converter.TemperatureFragment;
+import com.example.mooncalculator.Fragments.Converter.VolumeFragment;
 import com.example.mooncalculator.Fragments.Converter.LengthFragment;
 import com.example.mooncalculator.Fragments.Converter.MassFragment;
 import com.example.mooncalculator.Fragments.Converter.SpeedFragment;
@@ -59,13 +56,10 @@ public class ConvertorActivity extends AppCompatActivity {
         //tab view
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(
                 getSupportFragmentManager(), FragmentPagerItems.with(this)
-                .add(R.string.accelerationFragmentTitle, AccelerationFragment.class)
-                .add(R.string.angleFragmentTitle, AngleFragment.class)
                 .add(R.string.areaFragmentTitle, AreaFragment.class)
                 .add(R.string.dataStorageFragmentTitle, DataStorageFragment.class)
-                .add(R.string.dataTransferRateFragmentTitle, DataTransferRateFragment.class)
-                .add(R.string.energyFragmentTitle, EnergyFragment.class)
-                .add(R.string.forceFragmentTitle, ForceFragment.class)
+                .add(R.string.dataTransferRateFragmentTitle, TemperatureFragment.class)
+                .add(R.string.energyFragmentTitle, VolumeFragment.class)
                 .add(R.string.lengthFragmentTitle,LengthFragment.class)
                 .add(R.string.massFragmentTitle,MassFragment.class)
                 .add(R.string.speedFragmentTitle, SpeedFragment.class)

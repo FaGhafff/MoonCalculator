@@ -119,7 +119,7 @@ public class Core {
             case Millimeters:
                 middleValue = new UnitOf.Length().fromMillimeters(input).toMeters();
                 break;
-            case Nautical_miles:
+            case Nauticalmiles:
                 middleValue = new UnitOf.Length().fromNauticalMilesInternational(input).toMeters();
                 break;
         }
@@ -128,7 +128,7 @@ public class Core {
 
     Core to(Length length) {
         switch (length) {
-            case Nautical_miles:
+            case Nauticalmiles:
                 finalValue = new UnitOf.Length().fromMeters(middleValue).toNauticalMilesInternational();
                 break;
             case Millimeters:
@@ -202,25 +202,25 @@ public class Core {
             case Litres:
                 middleValue = new UnitOf.Volume().fromLiters(input).toLiters();
                 break;
-            case Cubic_feet:
+            case Cubicfeet:
                 middleValue = new UnitOf.Volume().fromCubicFeet(input).toLiters();
                 break;
-            case UK_gallons:
+            case UKgallons:
                 middleValue = new UnitOf.Volume().fromGallonsUK(input).toLiters();
                 break;
-            case US_gallons:
+            case USgallons:
                 middleValue = new UnitOf.Volume().fromGallonsUS(input).toLiters();
                 break;
             case Millilitres:
                 middleValue = new UnitOf.Volume().fromMilliliters(input).toLiters();
                 break;
-            case Cubic_inches:
+            case Cubicinches:
                 middleValue = new UnitOf.Volume().fromCubicInches(input).toLiters();
                 break;
-            case Cubic_metres:
+            case Cubicmetres:
                 middleValue = new UnitOf.Volume().fromCubicMeters(input).toLiters();
                 break;
-            case Cubic_centimetres:
+            case Cubiccentimetres:
                 middleValue = new UnitOf.Volume().fromCubicCentimeters(input).toLiters();
                 break;
         }
@@ -232,25 +232,25 @@ public class Core {
             case Litres:
                 finalValue = new UnitOf.Volume().fromLiters(middleValue).toLiters();
                 break;
-            case Cubic_feet:
+            case Cubicfeet:
                 finalValue = new UnitOf.Volume().fromLiters(middleValue).toCubicFeet();
                 break;
-            case UK_gallons:
+            case UKgallons:
                 finalValue = new UnitOf.Volume().fromLiters(middleValue).toGallonsUK();
                 break;
-            case US_gallons:
+            case USgallons:
                 finalValue = new UnitOf.Volume().fromLiters(middleValue).toGallonsUS();
                 break;
             case Millilitres:
                 finalValue = new UnitOf.Volume().fromLiters(middleValue).toMilliliters();
                 break;
-            case Cubic_inches:
+            case Cubicinches:
                 finalValue = new UnitOf.Volume().fromLiters(middleValue).toCubicInches();
                 break;
-            case Cubic_metres:
+            case Cubicmetres:
                 finalValue = new UnitOf.Volume().fromLiters(middleValue).toCubicMeters();
                 break;
-            case Cubic_centimetres:
+            case Cubiccentimetres:
                 finalValue = new UnitOf.Volume().fromLiters(middleValue).toCubicCentimeters();
                 break;
         }
@@ -272,10 +272,10 @@ public class Core {
             case Pounds:
                 middleValue = new UnitOf.Mass().fromPounds(input).toKilograms();
                 break;
-            case UK_tons:
+            case UKtons:
                 middleValue = new UnitOf.Mass().fromTonsImperial(input).toKilograms();
                 break;
-            case US_tons:
+            case UStons:
                 middleValue = new UnitOf.Mass().fromTonsUS(input).toKilograms();
                 break;
             case Kilograms:
@@ -299,10 +299,10 @@ public class Core {
             case Pounds:
                 finalValue = new UnitOf.Mass().fromKilograms(middleValue).toPounds();
                 break;
-            case UK_tons:
+            case UKtons:
                 finalValue = new UnitOf.Mass().fromKilograms(middleValue).toTonsImperial();
                 break;
-            case US_tons:
+            case UStons:
                 finalValue = new UnitOf.Mass().fromKilograms(middleValue).toTonsUS();
                 break;
             case Kilograms:
@@ -366,34 +366,34 @@ public class Core {
             case Knots:
                 middleValue = new UnitOf.Speed().fromKnots(input).toKilometersPerHour();
                 break;
-            case Feet_per_hour:
+            case Feetperhour:
                 middleValue = new UnitOf.Speed().fromFeetPerHour(input).toKilometersPerHour();
                 break;
-            case Meter_per_hour:
+            case Meterperhour:
                 middleValue = new UnitOf.Speed().fromMetersPerHour(input).toKilometersPerHour();
                 break;
-            case Miles_per_hour:
+            case Milesperhour:
                 middleValue = new UnitOf.Speed().fromMilesPerHour(input).toKilometersPerHour();
                 break;
-            case Feet_per_second:
+            case Feetpersecond:
                 middleValue = new UnitOf.Speed().fromFeetPerSecond(input).toKilometersPerHour();
                 break;
-            case Inches_per_hour:
+            case Inchesperhour:
                 middleValue = new UnitOf.Speed().fromInchesPerHour(input).toKilometersPerHour();
                 break;
-            case Meter_per_second:
+            case Meterpersecond:
                 middleValue = new UnitOf.Speed().fromMetersPerSecond(input).toKilometersPerHour();
                 break;
-            case Miles_per_second:
+            case Milespersecond:
                 middleValue = new UnitOf.Speed().fromMilesPerSecond(input).toKilometersPerHour();
                 break;
-            case Inches_per_second:
+            case Inchespersecond:
                 middleValue = new UnitOf.Speed().fromInchesPerSecond(input).toKilometersPerHour();
                 break;
-            case Kilometres_per_hour:
+            case Kilometresperhour:
                 middleValue = new UnitOf.Speed().fromKilometersPerHour(input).toKilometersPerHour();
                 break;
-            case Kilometres_per_second:
+            case Kilometrespersecond:
                 middleValue = new UnitOf.Speed().fromKilometersPerSecond(input).toKilometersPerHour();
                 break;
         }
@@ -405,34 +405,34 @@ public class Core {
             case Knots:
                 finalValue = new UnitOf.Speed().fromKilometersPerHour(middleValue).toKnots();
                 break;
-            case Feet_per_hour:
+            case Feetperhour:
                 finalValue = new UnitOf.Speed().fromKilometersPerHour(middleValue).toFeetPerHour();
                 break;
-            case Meter_per_hour:
+            case Meterperhour:
                 finalValue = new UnitOf.Speed().fromKilometersPerHour(middleValue).toMetersPerHour();
                 break;
-            case Miles_per_hour:
+            case Milesperhour:
                 finalValue = new UnitOf.Speed().fromKilometersPerHour(middleValue).toMilesPerHour();
                 break;
-            case Feet_per_second:
+            case Feetpersecond:
                 finalValue = new UnitOf.Speed().fromKilometersPerHour(middleValue).toFeetPerSecond();
                 break;
-            case Inches_per_hour:
+            case Inchesperhour:
                 finalValue = new UnitOf.Speed().fromKilometersPerHour(middleValue).toInchesPerHour();
                 break;
-            case Meter_per_second:
+            case Meterpersecond:
                 finalValue = new UnitOf.Speed().fromKilometersPerHour(middleValue).toMetersPerSecond();
                 break;
-            case Miles_per_second:
+            case Milespersecond:
                 finalValue = new UnitOf.Speed().fromKilometersPerHour(middleValue).toMilesPerSecond();
                 break;
-            case Inches_per_second:
+            case Inchespersecond:
                 finalValue = new UnitOf.Speed().fromKilometersPerHour(middleValue).toInchesPerSecond();
                 break;
-            case Kilometres_per_hour:
+            case Kilometresperhour:
                 finalValue = new UnitOf.Speed().fromKilometersPerHour(middleValue).toKilometersPerHour();
                 break;
-            case Kilometres_per_second:
+            case Kilometrespersecond:
                 finalValue = new UnitOf.Speed().fromKilometersPerHour(middleValue).toKilometersPerSecond();
                 break;
         }
@@ -534,7 +534,7 @@ public class Core {
         Feet,
         Yard,
         Miles,
-        Nautical_miles,
+        Nauticalmiles,
         Mils;
 
         static Length getEnum(String string) {
@@ -553,14 +553,14 @@ public class Core {
     }
 
     enum Volume {
-        UK_gallons,
-        US_gallons,
+        UKgallons,
+        USgallons,
         Litres,
         Millilitres,
-        Cubic_centimetres,
-        Cubic_metres,
-        Cubic_inches,
-        Cubic_feet;
+        Cubiccentimetres,
+        Cubicmetres,
+        Cubicinches,
+        Cubicfeet;
 
         static Volume getEnum(String string) {
             return Volume.valueOf(string);
@@ -569,8 +569,8 @@ public class Core {
 
     enum Mass {
         Tons,
-        UK_tons,
-        US_tons,
+        UKtons,
+        UStons,
         Pounds,
         Ounces,
         Kilograms,
@@ -595,16 +595,16 @@ public class Core {
     }
 
     enum Speed {
-        Meter_per_second,
-        Meter_per_hour,
-        Kilometres_per_second,
-        Kilometres_per_hour,
-        Inches_per_second,
-        Inches_per_hour,
-        Feet_per_second,
-        Feet_per_hour,
-        Miles_per_second,
-        Miles_per_hour,
+        Meterpersecond,
+        Meterperhour,
+        Kilometrespersecond,
+        Kilometresperhour,
+        Inchespersecond,
+        Inchesperhour,
+        Feetpersecond,
+        Feetperhour,
+        Milespersecond,
+        Milesperhour,
         Knots;
 
         static Speed getEnum(String string) {
