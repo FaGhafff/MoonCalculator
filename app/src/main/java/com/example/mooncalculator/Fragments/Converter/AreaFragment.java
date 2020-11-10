@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
+import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,7 +74,7 @@ public class AreaFragment extends Fragment {
     private EditText editTextFrom;
     private EditText editTextTo;
     private Core.Area from = null;
-    private Core.Area to = Core.Area.Hectares;
+    private Core.Area to = null;
     private Core core;
 
     @Override
@@ -83,30 +84,36 @@ public class AreaFragment extends Fragment {
 
         //init
         spinnerFrom = view.findViewById(R.id.spinnerFrom);
+        spinnerTo = view.findViewById(R.id.spinnerTo);
         editTextFrom = view.findViewById(R.id.editTextFrom);
         editTextTo = view.findViewById(R.id.editTextTo);
         core = new Core();
 
-        //from
+        //editTextFrom
+        editTextFrom.addTextChangedListener(textWatcherFrom);
 
+
+        //editTextTo
+        editTextTo.addTextChangedListener(textWatcherTo);
+
+        //from
         String[] fromArray = getResources().getStringArray(R.array.Area);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, fromArray);
-        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapterFrom = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, fromArray);
+        adapterFrom.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinnerFrom.setOnItemSelectedListener(listenerFrom);
-        spinnerFrom.setAdapter(adapter);
-        String selected = spinnerFrom.getSelectedItem().toString();
-        from = Core.Area.getEnum(delUnit(selected));
+        spinnerFrom.setAdapter(adapterFrom);
+        String selectedFrom = spinnerFrom.getSelectedItem().toString();
+        from = Core.Area.getEnum(delUnit(selectedFrom));
 
 
         //to
-
-        //editTextFrom
-
-//        editTextFrom.addTextChangedListener(textWatcherFrom);
-//
-//        //editTextTo
-//
-//        editTextTo.addTextChangedListener(textWatcherTo);
+        String[] toArray = getResources().getStringArray(R.array.Area);
+        ArrayAdapter<String> adapterTor = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, toArray);
+        adapterTor.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        spinnerTo.setOnItemSelectedListener(listenerTo);
+        spinnerTo.setAdapter(adapterTor);
+        String selectedTo = spinnerTo.getSelectedItem().toString();
+        to = Core.Area.getEnum(delUnit(selectedTo));
 
 
         // Inflate the layout for this fragment
@@ -116,16 +123,11 @@ public class AreaFragment extends Fragment {
     private final AdapterView.OnItemSelectedListener listenerFrom = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-            Toast.makeText(getContext(), adapterView.getSelectedItemId() + "", Toast.LENGTH_SHORT).show();
-//            if (adapterView.getSelectedItemId() == R.id.spinnerFrom) {
             String string = adapterView.getItemAtPosition(i).toString();
             from = Core.Area.getEnum(delUnit(string));
             System.out.println(string);
-            Toast.makeText(getContext(), string, Toast.LENGTH_SHORT).show();
-            onTextChangedFrom();
-            //todo set units and
-
-//            }
+            Toast.makeText(getContext(), string + " OIS from", Toast.LENGTH_SHORT).show();
+            updateValues(editTextTo, to, editTextFrom, from, false);
         }
 
         @Override
@@ -133,6 +135,19 @@ public class AreaFragment extends Fragment {
         }
     };
 
+    private final AdapterView.OnItemSelectedListener listenerTo = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            String string = adapterView.getItemAtPosition(i).toString();
+            to = Core.Area.getEnum(delUnit(string));
+            Toast.makeText(getContext(), string + " OIS to", Toast.LENGTH_SHORT).show();
+            updateValues(editTextFrom, from, editTextTo, to, false);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+        }
+    };
 
     private final TextWatcher textWatcherFrom = new TextWatcher() {
 
@@ -143,11 +158,12 @@ public class AreaFragment extends Fragment {
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            onTextChangedFrom();
+
         }
 
         @Override
         public void afterTextChanged(Editable editable) {
+            updateValues(editTextFrom, from, editTextTo, to, true);
 
         }
     };
@@ -156,27 +172,30 @@ public class AreaFragment extends Fragment {
 
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
         }
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            onTextChangedTo();
+
         }
 
         @Override
         public void afterTextChanged(Editable editable) {
-
+            updateValues(editTextTo, to, editTextFrom, from, true);
         }
     };
 
-    void onTextChangedFrom() {
-//        editTextTo.setText(core.setInput(Double.parseDouble(editTextFrom.getText().toString())).from(from).to(to).getOutput() + "");
-        
-    }
-
-    void onTextChangedTo() {
-        editTextFrom.setText(core.setInput(Double.parseDouble(editTextTo.getText().toString())).from(to).to(from).getOutput() + "");
+    private void updateValues(@NotNull EditText source, Core.Area from,EditText destination, Core.Area to, boolean canBeInfinity) {
+        if (source.isFocused() || !canBeInfinity) {
+            double doubleForm = 0;
+            try {
+                doubleForm = Double.parseDouble(source.getText().toString());
+            } catch (NumberFormatException e) {
+                doubleForm = 0;
+            }
+            String strTo = String.valueOf(core.setInput(doubleForm).from(from).to(to).getOutput());
+            destination.setText(strTo);
+        }
     }
 
     @NotNull
@@ -184,6 +203,10 @@ public class AreaFragment extends Fragment {
         string = string.replaceAll(" ", "");
         string = string.substring(0, string.indexOf('('));
         return string;
+        // todo : clean this shits
     }
+
+
+
 
 }

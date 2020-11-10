@@ -4,11 +4,20 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.mooncalculator.R;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,19 +57,143 @@ public class TimeFragment extends Fragment {
         return fragment;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+
+    private Spinner spinnerFrom;
+    private Spinner spinnerTo;
+    private EditText editTextFrom;
+    private EditText editTextTo;
+    private Core.Time from = null;
+    private Core.Time to = null;
+    private Core core;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_time, container, false);
+
+        //init
+        spinnerFrom = view.findViewById(R.id.spinnerFrom);
+        spinnerTo = view.findViewById(R.id.spinnerTo);
+        editTextFrom = view.findViewById(R.id.editTextFrom);
+        editTextTo = view.findViewById(R.id.editTextTo);
+        core = new Core();
+
+        //editTextFrom
+        editTextFrom.addTextChangedListener(textWatcherFrom);
+
+
+        //editTextTo
+        editTextTo.addTextChangedListener(textWatcherTo);
+
+        //from
+        String[] fromArray = getResources().getStringArray(R.array.Time);
+        ArrayAdapter<String> adapterFrom = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, fromArray);
+        adapterFrom.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        spinnerFrom.setOnItemSelectedListener(listenerFrom);
+        spinnerFrom.setAdapter(adapterFrom);
+        String selectedFrom = spinnerFrom.getSelectedItem().toString();
+        from = Core.Time.getEnum(delUnit(selectedFrom));
+
+
+        //to
+        String[] toArray = getResources().getStringArray(R.array.Time);
+        ArrayAdapter<String> adapterTor = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, toArray);
+        adapterTor.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        spinnerTo.setOnItemSelectedListener(listenerTo);
+        spinnerTo.setAdapter(adapterTor);
+        String selectedTo = spinnerTo.getSelectedItem().toString();
+        to = Core.Time.getEnum(delUnit(selectedTo));
+
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_time, container, false);
+        return view;
     }
+
+    private final AdapterView.OnItemSelectedListener listenerFrom = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            String string = adapterView.getItemAtPosition(i).toString();
+            from = Core.Time.getEnum(delUnit(string));
+            System.out.println(string);
+            Toast.makeText(getContext(), string + " OIS from", Toast.LENGTH_SHORT).show();
+            updateValues(editTextTo, to, editTextFrom, from, false);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+        }
+    };
+
+    private final AdapterView.OnItemSelectedListener listenerTo = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            String string = adapterView.getItemAtPosition(i).toString();
+            to = Core.Time.getEnum(delUnit(string));
+            Toast.makeText(getContext(), string + " OIS to", Toast.LENGTH_SHORT).show();
+            updateValues(editTextFrom, from, editTextTo, to, false);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+        }
+    };
+
+    private final TextWatcher textWatcherFrom = new TextWatcher() {
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            updateValues(editTextFrom, from, editTextTo, to, true);
+
+        }
+    };
+
+    private final TextWatcher textWatcherTo = new TextWatcher() {
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            updateValues(editTextTo, to, editTextFrom, from, true);
+        }
+    };
+
+    private void updateValues(@NotNull EditText source, Core.Time from, EditText destination, Core.Time to, boolean canBeInfinity) {
+        if (source.isFocused() || !canBeInfinity) {
+            double doubleForm = 0;
+            try {
+                doubleForm = Double.parseDouble(source.getText().toString());
+            } catch (NumberFormatException e) {
+                doubleForm = 0;
+            }
+            String strTo = String.valueOf(core.setInput(doubleForm).from(from).to(to).getOutput());
+            destination.setText(strTo);
+        }
+    }
+
+    @NotNull
+    private static String delUnit(String string) {
+        string = string.replaceAll(" ", "");
+//        string = string.substring(0, string.indexOf('('));
+        return string;
+    }
+
+
+
 }
