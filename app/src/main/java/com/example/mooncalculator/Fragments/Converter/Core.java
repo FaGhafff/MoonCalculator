@@ -1,7 +1,7 @@
 package com.example.mooncalculator.Fragments.Converter;
 
-import com.digidemic.unitof.UnitOf;
 
+import com.digidemic.unitof.UnitOf;
 
 public class Core {
 

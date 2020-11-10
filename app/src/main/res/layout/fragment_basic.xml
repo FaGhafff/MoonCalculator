@@ -34,6 +34,7 @@
                 android:background="@drawable/buttuns"
                 android:onClick="ClearBtn"
                 android:text="@string/clear"
+                android:textColor="#FFF4AB41"
                 android:textFontWeight="@android:integer/config_longAnimTime"
                 android:textSize="25sp" />
 

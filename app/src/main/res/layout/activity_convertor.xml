@@ -11,6 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPagerConverter"
+            android:layout_width="406dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view">
+
+        </androidx.viewpager.widget.ViewPager>
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             style="@style/Theme.MoonCalculator"
@@ -48,16 +59,14 @@
 
         </com.ogaclejapan.smarttablayout.SmartTabLayout>
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewPagerConverter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <RelativeLayout
+            android:id="@+id/view"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="#AAAAAA"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewPagerTabConverter">
-
-        </androidx.viewpager.widget.ViewPager>
-
+            app:layout_constraintTop_toBottomOf="@+id/viewPagerTabConverter" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

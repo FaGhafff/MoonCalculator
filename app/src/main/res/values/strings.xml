@@ -53,4 +53,45 @@
     <string name="equationFragmentTitle">Equation</string>
 
     <string name="title_activity_main2">MainActivity</string>
+
+    //scientific
+    <string name="Sclear" >C</string>
+    <string name="parantez">()</string>
+    <string name="dividedByOne">1/X</string>
+    <string name="Sbackspace"></string>
+    <string name="OnThePowerOfTwo">x^2</string>
+    <string name="OnThePowerOfN">X^n</string>
+    <string name="radicalrishe2">√x</string>
+    <string name="radicalN">n√x</string>
+    <string name="Sin">sin</string>
+    <string name="Cos">cos</string>
+    <string name="Tan">Tan</string>
+    <string name="Round">round</string>
+    <string name="DivideBySin">1/sin</string>
+    <string name="DivideByCos">1/cos</string>
+    <string name="DivideByTan">1/Tan</string>
+    <string name="AbsoluteValue">|X|</string>
+    <string name="Neper">e</string>
+    <string name="NeperOnThePowerOfX">e^x</string>
+    <string name="pi">π</string>
+    <string name="fact">X!</string>
+    <string name="max">Max</string>
+    <string name="min">Min</string>
+    <string name="logaritm">log</string>
+    <string name="ln">ln</string>
+
+    //equation
+
+    <string name="TabeYekMajhuli">f(X)</string>
+    <string name="TabeDoMajhuli">f(x,y)</string>
+    <string name="TabeSeMajhuli">f(x,y,z)</string>
+    <string name="X">x</string>
+    <string name="Y">y</string>
+    <string name="Z">z</string>
+    <string name="MoshtagTabe">"f'("</string>
+    <string name="vurudi">f(</string>
+    <string name="Camma">,</string>
+    <string name="QuestionMark">"?"</string>
+    <string name="Angah"> → </string>
+    <string name="Eequals">=</string>
 </resources>

@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle toggle;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    String Npi = "3.14159265";
 
     //todo make best structure for navigation menu with static class and inheritance
 
@@ -190,13 +191,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void EqualsBTN(View view) {
-        String userExp = display.getText().toString();
-        userExp = userExp.replaceAll("÷", "/");
-        userExp = userExp.replaceAll("×", "*");
-        Expression exp = new Expression(userExp);
-        String result = String.valueOf(exp.calculate());
-        display.setText(result);
-        display.setSelection(result.length());
+//        String userExp = display.getText().toString();
+//        userExp = userExp.replaceAll("÷", "/");
+//        userExp = userExp.replaceAll("×", "*");
+//        Expression exp = new Expression(userExp);
+//        String result = String.valueOf(exp.calculate());
+//        display.setText(result);
+//        display.setSelection(result.length());
+        String val = display.getText().toString();
+        String replacedtr = val.replace('÷','/').replace('×','*');
+        double result =  eval(replacedtr);
+        display.setText(String.valueOf(result));
+
     }
 
     public void OneBTN(View view) {
@@ -288,6 +294,215 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+    //equation
+    public void TabeYekMajhuli(View view) {
+        updateText("f(X)");
+
+    }  public void TabeDoMajhuli(View view) {
+        updateText("f(x,y)");
+
+    } public void TabeSeMajhuli(View view) {
+        updateText("f(x,y,z)");
+
+    } public void X(View view) {
+        updateText("x");
+
+    } public void Y(View view) {
+        updateText("y");
+
+    } public void Z(View view) {
+        updateText("z");
+
+    } public void MoshtagTabe(View view) {
+        updateText("f'(");
+
+    } public void vurudi(View view) {
+        updateText("f(");
+
+    } void Camma(View view) {
+        updateText(",");
+
+    } public void QuestionMark(View view) {
+        updateText("?");
+
+    } public void Angah(View view) {
+        updateText("→");
+
+    } public void Eequals(View view) {
+        updateText("=");
+
+    }
 
 
+
+
+
+
+
+
+
+    //scientific
+    public void parantez(View view){
+
+    }
+    public void dividedByOne(View view){
+        updateText("1");
+
+    }
+    public void onThePowerOfTwo(View view){
+        double d = Double.parseDouble(display.getText().toString());
+        double square = d*d;
+        display.setText(String.valueOf(square));
+    }
+
+    public void OnThePowerOfN(View view){
+
+    }
+
+    public void radicalrishe2(View view){
+        String val = display.getText().toString();
+        double r = Math.sqrt(Double.parseDouble(val));
+        display.setText(String.valueOf(r));
+
+    }    public void radicalN(View view){
+
+    }    public void Sin(View view){
+        display.setText(display.getText()+"sin");
+
+    }    public void Cos(View view){
+        display.setText(display.getText()+"cos");
+
+    }    public void Tan(View view){
+        display.setText(display.getText()+"tan");
+
+    }    public void Round(View view){
+
+    }    public void DivideBySin(View view){
+
+    }    public void DivideByCos(View view){
+
+    }    public void DivideByTan(View view){
+
+    }    public void AbsoluteValue(View view){
+
+    }    public void Neper(View view){
+
+    }    public void NeperOnThePowerOfX(View view){
+
+    }    public void pi(View view){
+         display.setText(display.getText()+Npi);
+
+    }    public void fact(View view){
+            int val = Integer.parseInt(display.getText().toString());
+            int fact = factorial(val);
+            display.setText(String.valueOf(fact));
+
+        }
+
+       public void max(View view){
+
+    }    public void min(View view){
+
+    }    public void logaritm(View view){
+        display.setText(display.getText()+"log");
+
+    }
+    public void ln(View view){
+        display.setText(display.getText()+"ln");
+
+    }
+
+    //factorial
+    int factorial(int n)
+    {
+
+        // find factorial
+        return (n == 1 || n == 0) ? 1 : n * factorial(n - 1);
+
+    }
+    //evaluation
+
+    public static double eval(final String str) {
+        return new Object() {
+            int pos = -1, ch;
+
+            void nextChar() {
+                ch = (++pos < str.length()) ? str.charAt(pos) : -1;
+            }
+
+            boolean eat(int charToEat) {
+                while (ch == ' ') nextChar();
+                if (ch == charToEat) {
+                    nextChar();
+                    return true;
+                }
+                return false;
+            }
+
+            double parse() {
+                nextChar();
+                double x = parseExpression();
+                if (pos < str.length()) throw new RuntimeException("Unexpected: " + (char)ch);
+                return x;
+            }
+
+            // Grammar:
+            // expression = term | expression `+` term | expression `-` term
+            // term = factor | term `*` factor | term `/` factor
+            // factor = `+` factor | `-` factor | `(` expression `)`
+            //        | number | functionName factor | factor `^` factor
+
+            double parseExpression() {
+                double x = parseTerm();
+                for (;;) {
+                    if      (eat('+')) x += parseTerm(); // addition
+                    else if (eat('-')) x -= parseTerm(); // subtraction
+                    else return x;
+                }
+            }
+
+            double parseTerm() {
+                double x = parseFactor();
+                for (;;) {
+                    if      (eat('*')) x *= parseFactor(); // multiplication
+                    else if (eat('/')) x /= parseFactor(); // division
+                    else return x;
+                }
+            }
+
+            double parseFactor() {
+                if (eat('+')) return parseFactor(); // unary plus
+                if (eat('-')) return -parseFactor(); // unary minus
+
+                double x;
+                int startPos = this.pos;
+                if (eat('(')) { // parentheses
+                    x = parseExpression();
+                    eat(')');
+                } else if ((ch >= '0' && ch <= '9') || ch == '.') { // numbers
+                    while ((ch >= '0' && ch <= '9') || ch == '.') nextChar();
+                    x = Double.parseDouble(str.substring(startPos, this.pos));
+                } else if (ch >= 'a' && ch <= 'z') { // functions
+                    while (ch >= 'a' && ch <= 'z') nextChar();
+                    String func = str.substring(startPos, this.pos);
+                    x = parseFactor();
+                    if (func.equals("sqrt")) x = Math.sqrt(x);
+                    else if (func.equals("Sin")) x = Math.sin(Math.toRadians(x));
+                    else if (func.equals("Cos")) x = Math.cos(Math.toRadians(x));
+                    else if (func.equals("Tan")) x = Math.tan(Math.toRadians(x));
+                    else if (func.equals("Logaritm")) x = Math.log10(x);
+                    else if (func.equals("ln")) x = Math.log(x);
+                    else throw new RuntimeException("Unknown function: " + func);
+                } else {
+                    throw new RuntimeException("Unexpected: " + (char)ch);
+                }
+
+                if (eat('^')) x = Math.pow(x, parseFactor()); // exponentiation
+
+                return x;
+            }
+        }.parse();
+    }
 }
+
+
