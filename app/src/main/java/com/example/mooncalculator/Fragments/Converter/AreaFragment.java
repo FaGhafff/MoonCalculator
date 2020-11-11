@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -82,6 +83,32 @@ public class AreaFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_area, container, false);
 
+
+        //keyboard
+        Button OneBTN = view.findViewById(R.id.OneBtn);
+        OneBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        Button TwoBTN = view.findViewById(R.id.TwoBtn);
+        Button ThreeBTN = view.findViewById(R.id.ThreeBtn);
+        Button FourBTN = view.findViewById(R.id.FourBtn);
+        Button  FiveBTN = view.findViewById(R.id.FiveBtn);
+        Button SixBTN = view.findViewById(R.id.SixBtn);
+        Button SevenBTN = view.findViewById(R.id.SevenBtn);
+        Button EightBTN = view.findViewById(R.id.EightBtn);
+        Button NineBTN = view.findViewById(R.id.NineBtn);
+        Button ClearBtn = view.findViewById(R.id.ClearBtn);
+
+
+
+
+
+
+
+
         //init
         spinnerFrom = view.findViewById(R.id.spinnerFrom);
         spinnerTo = view.findViewById(R.id.spinnerTo);
@@ -91,10 +118,29 @@ public class AreaFragment extends Fragment {
 
         //editTextFrom
         editTextFrom.addTextChangedListener(textWatcherFrom);
+        editTextFrom.setShowSoftInputOnFocus(false);
+        editTextFrom.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (getString(R.string._0).equals(editTextFrom.getText().toString())) {
+                    editTextFrom.setText("");
+                }
+            }
+        });
 
 
         //editTextTo
         editTextTo.addTextChangedListener(textWatcherTo);
+        editTextTo.setShowSoftInputOnFocus(false);
+        editTextTo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(getString(R.string._0).equals(editTextTo.getText().toString())){
+                    editTextTo.setText("");
+                }
+            }
+        });
 
         //from
         String[] fromArray = getResources().getStringArray(R.array.Area);
@@ -118,6 +164,7 @@ public class AreaFragment extends Fragment {
 
         // Inflate the layout for this fragment
         return view;
+
     }
 
     private final AdapterView.OnItemSelectedListener listenerFrom = new AdapterView.OnItemSelectedListener() {
@@ -207,6 +254,13 @@ public class AreaFragment extends Fragment {
     }
 
 
+    View.OnClickListener keyboard = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Button button = (Button) v;
 
+
+        }
+    };
 
 }
