@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class InFix2PostFix {
+public class InFix {
     private String infix;
 
-    public InFix2PostFix(String infix) {
+    public InFix(String infix) {
         this.infix = infix;
     }
 
@@ -73,5 +73,74 @@ public class InFix2PostFix {
         } catch (Exception e) {
             return "NAN";
         }
+    }
+
+    public String getPrefix() {
+        try {
+            return getPrefix(infix);
+        } catch (Exception e) {
+            return "NAN";
+        }
+    }
+
+    private int precedence(char c) {
+        switch (c) {
+            case '+':
+            case '-':
+                return 1;
+            case '*':
+            case '/':
+                return 2;
+            case '^':
+                return 3;
+        }
+        return -1;
+    }
+
+    private String getPrefix(String infix) {
+
+        StringBuilder result = new StringBuilder();
+        StringBuilder input = new StringBuilder(infix);
+        input.reverse();
+        Stack<Character> stack = new Stack<Character>();
+
+        char[] charsExp = new String(input).toCharArray();
+        for (int i = 0; i < charsExp.length; i++) {
+
+            if (charsExp[i] == '(') {
+                charsExp[i] = ')';
+                i++;
+            } else if (charsExp[i] == ')') {
+                charsExp[i] = '(';
+                i++;
+            }
+        }
+        for (int i = 0; i < charsExp.length; i++) {
+            char c = charsExp[i];
+
+            //check if char is operator or operand
+            if (precedence(c) > 0) {
+                while (!stack.isEmpty() && precedence(stack.peek()) >= precedence(c)) {
+                    result.append(stack.pop());
+                }
+                stack.push(c);
+            } else if (c == ')') {
+                char x = stack.pop();
+                while (x != '(') {
+                    result.append(x);
+                    x = stack.pop();
+                }
+            } else if (c == '(') {
+                stack.push(c);
+            } else {
+                //character is neither operator nor "("
+                result.append(c);
+            }
+        }
+
+        for (int i = 0; i <= stack.size(); i++) {
+            result.append(stack.pop());
+        }
+        return result.reverse().toString();
     }
 }
