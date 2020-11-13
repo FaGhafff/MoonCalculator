@@ -83,7 +83,7 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/ssss"
+                android:id="@+id/ClearBtnM"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="55sp"
@@ -98,7 +98,7 @@
                 />
 
             <ImageButton
-                android:id="@+id/button5"
+                android:id="@+id/BackSpaceBtnM"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="55dp"
@@ -115,7 +115,7 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/button8"
+                android:id="@+id/SevenBtnM"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="55sp"
@@ -129,7 +129,7 @@
                 app:srcCompat="@drawable/ic_baseline_backspace_24" />
 
             <Button
-                android:id="@+id/button6"
+                android:id="@+id/EightBtnM"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="55sp"
@@ -140,7 +140,7 @@
                 android:textSize="25sp" />
 
             <Button
-                android:id="@+id/button7"
+                android:id="@+id/NineBtnM"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="55sp"
@@ -158,7 +158,7 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/FourBTN"
+                android:id="@+id/FourBtnM"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="55sp"
@@ -173,7 +173,7 @@
                 />
 
             <Button
-                android:id="@+id/FiveBTN"
+                android:id="@+id/FiveBtnM"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="55sp"
@@ -187,7 +187,7 @@
                 />
 
             <Button
-                android:id="@+id/SixBTN"
+                android:id="@+id/SixBtnM"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="55sp"
@@ -205,7 +205,7 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/OneBTN"
+                android:id="@+id/OneBtnM"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="55sp"
@@ -220,7 +220,7 @@
                 />
 
             <Button
-                android:id="@+id/TwoBTN"
+                android:id="@+id/TwoBtnM"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="55sp"
@@ -234,7 +234,7 @@
                 />
 
             <Button
-                android:id="@+id/ThreeBTN"
+                android:id="@+id/ThreeBtnM"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="55sp"
@@ -252,7 +252,7 @@
             android:layout_height="match_parent">
 
             <ImageButton
-                android:id="@+id/button17"
+                android:id="@+id/UpBtnM"
                 android:layout_width="0dp"
                 android:layout_height="55sp"
                 android:layout_marginStart="4dp"
@@ -266,7 +266,7 @@
                 />
 
             <Button
-                android:id="@+id/button16"
+                android:id="@+id/DotBtnM"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="55sp"
@@ -279,7 +279,7 @@
                 />
 
             <ImageButton
-                android:id="@+id/button15"
+                android:id="@+id/DownBtnM"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="55sp"
@@ -298,7 +298,7 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/button18"
+                android:id="@+id/ZeroBtnM"
                 android:layout_width="377dp"
                 android:layout_height="55sp"
                 android:layout_marginStart="4dp"

@@ -89,20 +89,35 @@ public class AreaFragment extends Fragment {
 
         //keyboard
         Button OneBTN = view.findViewById(R.id.OneBtnA);
+        OneBTN.setOnClickListener(keyboard);
         Button TwoBTN = view.findViewById(R.id.TwoBtnA);
+        TwoBTN.setOnClickListener(keyboard);
         Button ThreeBTN = view.findViewById(R.id.ThreeBtnA);
+        ThreeBTN.setOnClickListener(keyboard);
         Button FourBTN = view.findViewById(R.id.FourBtnA);
+        FourBTN.setOnClickListener(keyboard);
         Button FiveBTN = view.findViewById(R.id.FiveBtnA);
+        FiveBTN.setOnClickListener(keyboard);
         Button SixBTN = view.findViewById(R.id.SixBtnA);
+        SixBTN.setOnClickListener(keyboard);
         Button SevenBTN = view.findViewById(R.id.SevenBtnA);
+        SevenBTN.setOnClickListener(keyboard);
         Button EightBTN = view.findViewById(R.id.EightBtnA);
+        EightBTN.setOnClickListener(keyboard);
         Button NineBTN = view.findViewById(R.id.NineBtnA);
+        NineBTN.setOnClickListener(keyboard);
         Button zero = view.findViewById(R.id.ZeroBtnA);
+        zero.setOnClickListener(keyboard);
         Button ClearBtn = view.findViewById(R.id.ClearBtnA);
+        ClearBtn.setOnClickListener(keyboard);
         ImageButton backSpaceBTN = view.findViewById(R.id.BackSpaceBtnA);
+        backSpaceBTN.setOnClickListener(keyboard);
         ImageButton up = view.findViewById(R.id.UpBtnA);
+        up.setOnClickListener(keyboard);
         ImageButton down = view.findViewById(R.id.DownBtnA);
+        down.setOnClickListener(keyboard);
         Button dot = view.findViewById(R.id.DotBtnA);
+        dot.setOnClickListener(keyboard);
 
 
         //init
@@ -262,4 +277,49 @@ public class AreaFragment extends Fragment {
         }
     };
 
+    private void BackSpaceA (EditText ed){
+        int cursorPos = ed.getSelectionStart();
+        int textlen = ed.getText().length();
+        if (cursorPos != 0 && textlen != 0) {
+            SpannableStringBuilder selection = (SpannableStringBuilder) ed.getText();
+            selection.replace(cursorPos - 1, cursorPos, "");
+            ed.setText(selection);
+            ed.setSelection(cursorPos - 1);
+    }
+}
+    View.OnClickListener backspaceListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (editTextFrom.isFocused())
+                BackSpaceA(editTextFrom);
+            if (editTextTo.isFocused())
+                BackSpaceA(editTextTo);
+        }
+    };
+
+    private void CleanA(EditText ed){
+        ed.setText("");
+    }
+    View.OnClickListener CleanListiner = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (editTextFrom.isFocused())
+                CleanA(editTextFrom);
+            if (editTextTo.isFocused())
+                CleanA(editTextTo);
+        }
+    };
+    View.OnClickListener UpListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            editTextFrom.requestFocus();
+        }
+    };
+    View.OnClickListener downListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            editTextTo.requestFocus();
+
+        }
+    };
 }
