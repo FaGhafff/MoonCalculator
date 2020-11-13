@@ -167,13 +167,12 @@ public class MainActivity extends AppCompatActivity {
         int cursorPos = display.getSelectionStart();
         String leftStr = oldStr.substring(0, cursorPos);
         String rightStr = oldStr.substring(cursorPos);
-        if (getString(R.string.display).equals(display.getText().toString())) {
+        if (getString(R.string.display).equals(display.getText().toString()) || display.getText().toString().equals("NaN")) {
             display.setText(strToAdd);
-            display.setSelection(cursorPos + 1);
         } else {
-            display.setText(String.format("%s%S%S", leftStr, strToAdd, rightStr));
-            display.setSelection(cursorPos + 1);
+            display.setText(String.format("%s%s%s", leftStr, strToAdd, rightStr));
         }
+        display.setSelection(cursorPos + strToAdd.length());
 
     }
 
@@ -197,7 +196,8 @@ public class MainActivity extends AppCompatActivity {
         val = val.replace('÷', '/').replace('×', '*');
         Calculate calculate = new Calculate(val);
         display.setText(calculate.getResult());
-        Statics.saveExpression(getSharedPreferences(Statics.SPName,MODE_PRIVATE),calculate.getExpression());
+        display.setSelection(display.getText().toString().length());
+        Statics.saveExpression(getSharedPreferences(Statics.SPName, MODE_PRIVATE), calculate.getExpression());
 
 //        double result =  eval(replacedtr);
 //        display.setText(String.valueOf(result));
@@ -295,7 +295,7 @@ public class MainActivity extends AppCompatActivity {
 
     //equation
     public void TabeYekMajhuli(View view) {
-        updateText("f(X)");
+        updateText("f(x)");
     }
 
     public void TabeDoMajhuli(View view) {
@@ -319,15 +319,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void MoshtagTabe(View view) {
-        updateText("f'(");
+        updateText("der(f(");
     }
 
     public void vurudi(View view) {
         updateText("f(");
-    }
-
-    void Camma(View view) {
-        updateText(",");
     }
 
     public void QuestionMark(View view) {
@@ -342,10 +338,18 @@ public class MainActivity extends AppCompatActivity {
         updateText("=");
     }
 
+    public void CommaBtn(View view) {
+        updateText(",");
+    }
 
     //scientific
     public void parantez(View view) {
-
+        String string = display.getText().toString();
+        if (string.charAt(string.length() - 1) == '(') {
+            BackSpaceBtn(view);
+            updateText(")");
+        } else
+            updateText("(");
     }
 
     public void dividedByOne(View view) {
@@ -374,7 +378,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Cos(View view) {
-        updateText("");
+        updateText("cos(");
     }
 
     public void Tan(View view) {
