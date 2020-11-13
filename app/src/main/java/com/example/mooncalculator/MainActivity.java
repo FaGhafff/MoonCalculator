@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         //tab view
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(
                 getSupportFragmentManager(), FragmentPagerItems.with(this)
-                .add(R.string.expertFragmentTitle,ExpertFragment.class)
+                .add(R.string.expertFragmentTitle, ExpertFragment.class)
                 .add(R.string.basicFragmentTitle, BasicFragment.class)
                 .add(R.string.equationFragmentTitle, EquationFragment.class)
                 .create());
@@ -62,10 +62,6 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setCurrentItem(1);
         SmartTabLayout viewPagerTab = (SmartTabLayout) findViewById(R.id.viewPagerTabMain);
         viewPagerTab.setViewPager(viewPager);
-
-
-
-
 
 
         //calculator
@@ -96,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+    //Navigation Menu
     public void onClickHome(MenuItem item) {
         drawerLayout.closeDrawer(GravityCompat.START);
     }
@@ -103,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
     public void onClickConverter(MenuItem item) {
         Statics.redirectActivity(this, ConvertorActivity.class);
     }
-
 
     public void onClickOurWebsite(MenuItem item) {
 
@@ -125,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
         Statics.showExitDialog(this, drawerLayout);
     }
 
-
     private static void openDrawer(DrawerLayout drawerLayout) {
         drawerLayout.openDrawer(GravityCompat.START);
     }
@@ -135,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
             drawerLayout.closeDrawer(GravityCompat.START);
     }
 
+    //Navigation Menu END
     @Override
     protected void onPause() {
         System.out.println(this.getLocalClassName());
@@ -182,12 +179,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void ZeroBTN(View view) {
         updateText("0");
-
     }
 
     public void DotBTN(View view) {
         updateText(".");
-
     }
 
     public void EqualsBTN(View view) {
@@ -199,35 +194,34 @@ public class MainActivity extends AppCompatActivity {
 //        display.setText(result);
 //        display.setSelection(result.length());
         String val = display.getText().toString();
-        String replacedtr = val.replace('÷','/').replace('×','*');
-        double result =  eval(replacedtr);
-        display.setText(String.valueOf(result));
+        val = val.replace('÷', '/').replace('×', '*');
+        Calculate calculate = new Calculate(val);
+        display.setText(calculate.getResult());
+        Statics.saveExpression(getSharedPreferences(Statics.SPName,MODE_PRIVATE),calculate.getExpression());
+
+//        double result =  eval(replacedtr);
+//        display.setText(String.valueOf(result));
 
     }
 
     public void OneBTN(View view) {
         updateText("1");
-
     }
 
     public void TwoBTN(View view) {
         updateText("2");
-
     }
 
     public void ThreeBTN(View view) {
         updateText("3");
-
     }
 
     public void FourBTN(View view) {
         updateText("4");
-
     }
 
     public void FiveBTN(View view) {
         updateText("5");
-
     }
 
     public void SixBTN(View view) {
@@ -240,47 +234,51 @@ public class MainActivity extends AppCompatActivity {
 
     public void EightBTN(View view) {
         updateText("8");
-
     }
 
     public void NineBTN(View view) {
         updateText("9");
-
     }
 
     public void PlusBtn(View view) {
         updateText("+");
-
     }
 
     public void MinusBtn(View view) {
         updateText("-");
-
     }
 
     public void MultiplyBtn(View view) {
         updateText("×");
-
     }
 
     public void DivideBtn(View view) {
         updateText("÷");
-
     }
 
     public void ClearBtn(View view) {
         display.setText("");
-
-
     }
 
     public void PlusMinusBtn(View view) {
+        String string = display.getText().toString();
+        if (string.length() == 0)
+            updateText("-");
+        else {
+            for (int i = string.length() - 1; i > -1; i--) {
+                char c = string.charAt(i);
+                if (c == '(' || !Character.isLetterOrDigit(c)) {
+                    string = string.substring(0, i + 1).concat("(-").concat(string.substring(i + 1));
+                    break;
+                }
+            }
+            display.setText(string);
+        }
 
     }
 
     public void PercentBtn(View view) {
         updateText("%");
-
     }
 
     public void BackSpaceBtn(View view) {
@@ -294,127 +292,149 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
     //equation
     public void TabeYekMajhuli(View view) {
         updateText("f(X)");
-
-    }  public void TabeDoMajhuli(View view) {
-        updateText("f(x,y)");
-
-    } public void TabeSeMajhuli(View view) {
-        updateText("f(x,y,z)");
-
-    } public void X(View view) {
-        updateText("x");
-
-    } public void Y(View view) {
-        updateText("y");
-
-    } public void Z(View view) {
-        updateText("z");
-
-    } public void MoshtagTabe(View view) {
-        updateText("f'(");
-
-    } public void vurudi(View view) {
-        updateText("f(");
-
-    } void Camma(View view) {
-        updateText(",");
-
-    } public void QuestionMark(View view) {
-        updateText("?");
-
-    } public void Angah(View view) {
-        updateText("→");
-
-    } public void Eequals(View view) {
-        updateText("=");
-
     }
 
+    public void TabeDoMajhuli(View view) {
+        updateText("f(x,y)");
+    }
 
+    public void TabeSeMajhuli(View view) {
+        updateText("f(x,y,z)");
+    }
 
+    public void X(View view) {
+        updateText("x");
+    }
 
+    public void Y(View view) {
+        updateText("y");
+    }
 
+    public void Z(View view) {
+        updateText("z");
+    }
 
+    public void MoshtagTabe(View view) {
+        updateText("f'(");
+    }
 
+    public void vurudi(View view) {
+        updateText("f(");
+    }
+
+    void Camma(View view) {
+        updateText(",");
+    }
+
+    public void QuestionMark(View view) {
+        updateText("?");
+    }
+
+    public void Angah(View view) {
+        updateText("→");
+    }
+
+    public void Eequals(View view) {
+        updateText("=");
+    }
 
 
     //scientific
-    public void parantez(View view){
-
-    }
-    public void dividedByOne(View view){
-        updateText("1");
-
-    }
-    public void onThePowerOfTwo(View view){
-        double d = Double.parseDouble(display.getText().toString());
-        double square = d*d;
-        display.setText(String.valueOf(square));
-    }
-
-    public void OnThePowerOfN(View view){
+    public void parantez(View view) {
 
     }
 
-    public void radicalrishe2(View view){
-        String val = display.getText().toString();
-        double r = Math.sqrt(Double.parseDouble(val));
-        display.setText(String.valueOf(r));
-
-    }    public void radicalN(View view){
-
-    }    public void Sin(View view){
-        display.setText(display.getText()+"sin");
-
-    }    public void Cos(View view){
-        display.setText(display.getText()+"cos");
-
-    }    public void Tan(View view){
-        display.setText(display.getText()+"tan");
-
-    }    public void Round(View view){
-
-    }    public void DivideBySin(View view){
-
-    }    public void DivideByCos(View view){
-
-    }    public void DivideByTan(View view){
-
-    }    public void AbsoluteValue(View view){
-
-    }    public void Neper(View view){
-
-    }    public void NeperOnThePowerOfX(View view){
-
-    }    public void pi(View view){
-         display.setText(display.getText()+Npi);
-
-    }    public void fact(View view){
-            int val = Integer.parseInt(display.getText().toString());
-            int fact = factorial(val);
-            display.setText(String.valueOf(fact));
-
-        }
-
-       public void max(View view){
-
-    }    public void min(View view){
-
-    }    public void logaritm(View view){
-        display.setText(display.getText()+"log");
+    public void dividedByOne(View view) {
+        updateText("1/(");
 
     }
-    public void ln(View view){
-        display.setText(display.getText()+"ln");
 
+    public void onThePowerOfTwo(View view) {
+        updateText("^2");
+    }
+
+    public void OnThePowerOfN(View view) {
+        updateText("^(");
+    }
+
+    public void radicalrishe2(View view) {
+        updateText("sqrt(");
+    }
+
+    public void radicalN(View view) {
+        updateText("^(1/");
+    }
+
+    public void Sin(View view) {
+        updateText("sin(");
+    }
+
+    public void Cos(View view) {
+        updateText("");
+    }
+
+    public void Tan(View view) {
+        updateText("tan(");
+    }
+
+    public void Round(View view) {
+        updateText("round(");
+    }
+
+    public void DivideBySin(View view) {
+        updateText("arcsin(");
+    }
+
+    public void DivideByCos(View view) {
+        updateText("arccos(");
+    }
+
+    public void DivideByTan(View view) {
+        updateText("arctan(");
+    }
+
+    public void AbsoluteValue(View view) {
+        updateText("abs(");
+    }
+
+    public void Neper(View view) {
+        updateText("e");
+    }
+
+    public void NeperOnThePowerOfX(View view) {
+        updateText("e^(");
+    }
+
+    public void pi(View view) {
+        updateText("pi");
+    }
+
+    public void fact(View view) {
+        updateText("!");
+    }
+
+    public void max(View view) {
+        updateText("max(");
+    }
+
+    public void min(View view) {
+        updateText("min(");
+    }
+
+    public void logaritm(View view) {
+        updateText("log(");
+    }
+
+    public void ln(View view) {
+        updateText("ln(");
     }
 
     //factorial
-    int factorial(int n)
-    {
+    int factorial(int n) {
 
         // find factorial
         return (n == 1 || n == 0) ? 1 : n * factorial(n - 1);
@@ -442,7 +462,7 @@ public class MainActivity extends AppCompatActivity {
             double parse() {
                 nextChar();
                 double x = parseExpression();
-                if (pos < str.length()) throw new RuntimeException("Unexpected: " + (char)ch);
+                if (pos < str.length()) throw new RuntimeException("Unexpected: " + (char) ch);
                 return x;
             }
 
@@ -454,8 +474,8 @@ public class MainActivity extends AppCompatActivity {
 
             double parseExpression() {
                 double x = parseTerm();
-                for (;;) {
-                    if      (eat('+')) x += parseTerm(); // addition
+                for (; ; ) {
+                    if (eat('+')) x += parseTerm(); // addition
                     else if (eat('-')) x -= parseTerm(); // subtraction
                     else return x;
                 }
@@ -463,8 +483,8 @@ public class MainActivity extends AppCompatActivity {
 
             double parseTerm() {
                 double x = parseFactor();
-                for (;;) {
-                    if      (eat('*')) x *= parseFactor(); // multiplication
+                for (; ; ) {
+                    if (eat('*')) x *= parseFactor(); // multiplication
                     else if (eat('/')) x /= parseFactor(); // division
                     else return x;
                 }
@@ -494,7 +514,7 @@ public class MainActivity extends AppCompatActivity {
                     else if (func.equals("ln")) x = Math.log(x);
                     else throw new RuntimeException("Unknown function: " + func);
                 } else {
-                    throw new RuntimeException("Unexpected: " + (char)ch);
+                    throw new RuntimeException("Unexpected: " + (char) ch);
                 }
 
                 if (eat('^')) x = Math.pow(x, parseFactor()); // exponentiation
@@ -504,5 +524,3 @@ public class MainActivity extends AppCompatActivity {
         }.parse();
     }
 }
-
-

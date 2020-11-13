@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.audiofx.AcousticEchoCanceler;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -14,10 +15,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Statics {
 
+    static String SPName="SPHistory";
     public static void showExitDialog(Activity activity, DrawerLayout drawerLayout) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle("Exit")
@@ -39,29 +42,59 @@ public class Statics {
     }
 
     public static void saveExpression(@NotNull SharedPreferences sharedPreferences, String expression) {
-        Map<String,String> map = (Map<String, String>) sharedPreferences.getAll();
+        Map<String, String> map = (Map<String, String>) sharedPreferences.getAll();
         int lastIndex = 0;
         if (!map.isEmpty()) {
             Object[] keys = map.keySet().toArray();
-            lastIndex= Integer.parseInt((String) keys[keys.length-1]);
+            lastIndex = Integer.parseInt((String) keys[keys.length - 1]);
         }
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(String.valueOf(++lastIndex),expression);
+        editor.putString(String.valueOf(++lastIndex), expression);
         editor.apply();
     }
 
     @NotNull
     @Contract("_ -> new")
-    public static List<String> getHistoryData(@NotNull SharedPreferences sharedPreferences){
+    public static List<String> getHistoryData(@NotNull SharedPreferences sharedPreferences) {
         return new ArrayList<>((Collection<? extends String>) sharedPreferences.getAll().values());
     }
 
-    public static void updateDataSP(@NotNull SharedPreferences sharedPreferences, @NotNull List<String> data){
+    public static void updateDataSP(@NotNull SharedPreferences sharedPreferences, @NotNull List<String> data) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         AtomicInteger index = new AtomicInteger(0);
         editor.clear();
         for (String str : data)
-            editor.putString(String.valueOf(index.getAndIncrement()),str);
+            editor.putString(String.valueOf(index.getAndIncrement()), str);
         editor.apply();
+    }
+
+    public static boolean CanPutParentheses(String string) {
+        //todo
+        return true;
+    }
+
+    public static boolean isParenthesesCorrect(String string) {
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < string.length(); i++) {
+            char c = string.charAt(i);
+            if (c != '(' && c != ')')
+                continue;
+            if (c == '(') {
+                stack.push(c);
+
+            }else {
+                if (stack.empty())
+                    return false;
+                char cStack=stack.pop();
+                if (cStack!='(')
+                    return false;
+            }
+        }
+        return true;
+    }
+
+
+    public static String calculateExpression(String expression) {
+        return "";
     }
 }

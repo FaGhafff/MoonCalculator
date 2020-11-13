@@ -62,7 +62,7 @@ public class HistoryActivity extends AppCompatActivity {
             Toast.makeText(this, item.getTitle().toString(), Toast.LENGTH_SHORT).show();
             return true;
         });
-        sharedPreferences = getSharedPreferences("SPHistory",MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(Statics.SPName,MODE_PRIVATE);
 
         //set some ex
         Statics.saveExpression(sharedPreferences,"fati");

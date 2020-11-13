@@ -1,9 +1,11 @@
 package com.example.mooncalculator.Fragments.Converter;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.strictmode.WebViewMethodCalledOnWrongThreadViolation;
 import android.text.Editable;
 import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
@@ -14,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -85,28 +88,21 @@ public class AreaFragment extends Fragment {
 
 
         //keyboard
-        Button OneBTN = view.findViewById(R.id.OneBtn);
-        OneBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        Button TwoBTN = view.findViewById(R.id.TwoBtn);
-        Button ThreeBTN = view.findViewById(R.id.ThreeBtn);
-        Button FourBTN = view.findViewById(R.id.FourBtn);
-        Button  FiveBTN = view.findViewById(R.id.FiveBtn);
-        Button SixBTN = view.findViewById(R.id.SixBtn);
-        Button SevenBTN = view.findViewById(R.id.SevenBtn);
-        Button EightBTN = view.findViewById(R.id.EightBtn);
-        Button NineBTN = view.findViewById(R.id.NineBtn);
-        Button ClearBtn = view.findViewById(R.id.ClearBtn);
-
-
-
-
-
-
+        Button OneBTN = view.findViewById(R.id.OneBtnA);
+        Button TwoBTN = view.findViewById(R.id.TwoBtnA);
+        Button ThreeBTN = view.findViewById(R.id.ThreeBtnA);
+        Button FourBTN = view.findViewById(R.id.FourBtnA);
+        Button FiveBTN = view.findViewById(R.id.FiveBtnA);
+        Button SixBTN = view.findViewById(R.id.SixBtnA);
+        Button SevenBTN = view.findViewById(R.id.SevenBtnA);
+        Button EightBTN = view.findViewById(R.id.EightBtnA);
+        Button NineBTN = view.findViewById(R.id.NineBtnA);
+        Button zero = view.findViewById(R.id.ZeroBtnA);
+        Button ClearBtn = view.findViewById(R.id.ClearBtnA);
+        ImageButton backSpaceBTN = view.findViewById(R.id.BackSpaceBtnA);
+        ImageButton up = view.findViewById(R.id.UpBtnA);
+        ImageButton down = view.findViewById(R.id.DownBtnA);
+        Button dot = view.findViewById(R.id.DotBtnA);
 
 
         //init
@@ -120,7 +116,6 @@ public class AreaFragment extends Fragment {
         editTextFrom.addTextChangedListener(textWatcherFrom);
         editTextFrom.setShowSoftInputOnFocus(false);
         editTextFrom.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 if (getString(R.string._0).equals(editTextFrom.getText().toString())) {
@@ -162,9 +157,13 @@ public class AreaFragment extends Fragment {
         to = Core.Area.getEnum(delUnit(selectedTo));
 
 
+        //setFocus
+         editTextFrom.requestFocus();
+
+
+
         // Inflate the layout for this fragment
         return view;
-
     }
 
     private final AdapterView.OnItemSelectedListener listenerFrom = new AdapterView.OnItemSelectedListener() {
