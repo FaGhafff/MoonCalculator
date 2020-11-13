@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="purple_200">#262930</color>//range buttn ha vagti darke
+    <color name="purple_500">#262930</color>//buttun ha
+    <color name="purple_700">#000000</color>//balaye safhe
+    <color name="teal_200">#F4AB41</color>
+    <color name="teal_700">#F4AB41</color>
+    <color name="black">#DFDBDB</color>//rang vagti darke text
+    <color name="white">#DFDBDB</color>/text ha
+    <color name="yellow">#F4AB41</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="icon_enabled">#FFFFFFFF</color>
+    <color name="icon_disabled">#FF63727B</color>
     <color name="black20">#33000000</color>
+    <color name="swipeLeftBackground">#BC124B</color>
+    <color name="swipeRightBackground">#0FA114</color>
+
 </resources>
