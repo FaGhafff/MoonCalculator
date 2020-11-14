@@ -2,6 +2,9 @@ package com.example.mooncalculator.Fragments.Converter;
 
 
 import com.digidemic.unitof.UnitOf;
+import com.example.mooncalculator.Notation.InFix;
+import com.example.mooncalculator.Notation.Postfix;
+import com.example.mooncalculator.Notation.Prefix;
 
 public class Core {
 
@@ -9,6 +12,8 @@ public class Core {
     private double middleValue;
     private double finalValue;
     private String expression;
+    private Notation notationFrom;
+    private Notation notationTo;
 
 
     Core setInput(double input) {
@@ -487,13 +492,50 @@ public class Core {
         return this;
     }
 
-    Core from(Notation notation) {
-        //todo my eyes are destroyed
+    Core from(Notation from) {
+        notationFrom = from;
         return this;
     }
 
-    double getOutput() {
+    Core to(Notation to) {
+        notationTo = to;
+        return this;
+    }
 
+    String getExpression() {
+        switch (notationFrom) {
+            case Infix:
+                switch (notationTo) {
+                    case Infix:
+                        return expression;
+                    case Prefix:
+                        return new InFix(expression).getPrefix();
+                    case Postfix:
+                        return new InFix(expression).getPostfix();
+                }
+            case Prefix:
+                switch (notationTo) {
+                    case Infix:
+                        return new Prefix(expression).getInfix();
+                    case Prefix:
+                        return expression;
+                    case Postfix:
+                        return new Prefix(expression).getPostfix();
+                }
+            case Postfix:
+                switch (notationTo) {
+                    case Infix:
+                        return new Postfix(expression).getInfix();
+                    case Prefix:
+                        return new Postfix(expression).getPrefix();
+                    case Postfix:
+                        return expression;
+                }
+        }
+        return "NaN";
+    }
+
+    double getOutput() {
         return finalValue;
     }
 

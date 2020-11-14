@@ -5,13 +5,16 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
+import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -71,6 +74,40 @@ public class TemperatureFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_temperature, container, false);
 
+        //keyboard
+        Button OneBTN = view.findViewById(R.id.OneBtnT);
+        OneBTN.setOnClickListener(keyboard);
+        Button TwoBTN = view.findViewById(R.id.TwoBtnT);
+        TwoBTN.setOnClickListener(keyboard);
+        Button ThreeBTN = view.findViewById(R.id.ThreeBtnT);
+        ThreeBTN.setOnClickListener(keyboard);
+        Button FourBTN = view.findViewById(R.id.FourBtnT);
+        FourBTN.setOnClickListener(keyboard);
+        Button FiveBTN = view.findViewById(R.id.FiveBtnT);
+        FiveBTN.setOnClickListener(keyboard);
+        Button SixBTN = view.findViewById(R.id.SixBtnT);
+        SixBTN.setOnClickListener(keyboard);
+        Button SevenBTN = view.findViewById(R.id.SevenBtnT);
+        SevenBTN.setOnClickListener(keyboard);
+        Button EightBTN = view.findViewById(R.id.EightBtnT);
+        EightBTN.setOnClickListener(keyboard);
+        Button NineBTN = view.findViewById(R.id.NineBtnT);
+        NineBTN.setOnClickListener(keyboard);
+        Button zero = view.findViewById(R.id.ZeroBtnT);
+        zero.setOnClickListener(keyboard);
+        Button dot = view.findViewById(R.id.DotBtnT);
+        dot.setOnClickListener(keyboard);
+
+        Button ClearBtn = view.findViewById(R.id.ClearBtnT);
+        ClearBtn.setOnClickListener(cleanListener);
+        ImageButton backSpaceBTN = view.findViewById(R.id.BackSpaceBtnT);
+        backSpaceBTN.setOnClickListener(backSpaceListener);
+        ImageButton up = view.findViewById(R.id.UpBtnT);
+        up.setOnClickListener(upListener);
+        ImageButton down = view.findViewById(R.id.DownBtnT);
+        down.setOnClickListener(downListener);
+
+
         //init
         spinnerFrom = view.findViewById(R.id.spinnerFrom);
         spinnerTo = view.findViewById(R.id.spinnerTo);
@@ -80,10 +117,12 @@ public class TemperatureFragment extends Fragment {
 
         //editTextFrom
         editTextFrom.addTextChangedListener(textWatcherFrom);
-
+        editTextFrom.setShowSoftInputOnFocus(false);
+        editTextFrom.requestFocus();
 
         //editTextTo
         editTextTo.addTextChangedListener(textWatcherTo);
+        editTextTo.setShowSoftInputOnFocus(false);
 
         //from
         String[] fromArray = getResources().getStringArray(R.array.Temperature);
@@ -115,7 +154,6 @@ public class TemperatureFragment extends Fragment {
             String string = adapterView.getItemAtPosition(i).toString();
             from = Core.Temperature.getEnum(delUnit(string));
             System.out.println(string);
-            Toast.makeText(getContext(), string + " OIS from", Toast.LENGTH_SHORT).show();
             updateValues(editTextTo, to, editTextFrom, from, false);
         }
 
@@ -129,7 +167,6 @@ public class TemperatureFragment extends Fragment {
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
             String string = adapterView.getItemAtPosition(i).toString();
             to = Core.Temperature.getEnum(delUnit(string));
-            Toast.makeText(getContext(), string + " OIS to", Toast.LENGTH_SHORT).show();
             updateValues(editTextFrom, from, editTextTo, to, false);
         }
 
@@ -194,6 +231,78 @@ public class TemperatureFragment extends Fragment {
         return string;
     }
 
+    private void BackSpaceA(EditText ed) {
+        int cursorPos = ed.getSelectionStart();
+        int textlen = ed.getText().length();
+        if (cursorPos != 0 && textlen != 0) {
+            SpannableStringBuilder selection = (SpannableStringBuilder) ed.getText();
+            selection.replace(cursorPos - 1, cursorPos, "");
+            ed.setText(selection);
+            ed.setSelection(cursorPos - 1);
+        }
+    }
 
+    private void updateText(String strToAdd,EditText display) {
+        String oldStr = display.getText().toString();
+        int cursorPos = display.getSelectionStart();
+        String leftStr = oldStr.substring(0, cursorPos);
+        String rightStr = oldStr.substring(cursorPos);
+        if (getString(R.string.display).equals(display.getText().toString()) || display.getText().toString().equals("0.0")) {
+            display.setText(strToAdd);
+        } else {
+            display.setText(String.format("%s%s%s", leftStr, strToAdd, rightStr));
+        }
+        display.setSelection(cursorPos + strToAdd.length());
+    }
+
+    View.OnClickListener backSpaceListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (editTextFrom.isFocused())
+                BackSpaceA(editTextFrom);
+            if (editTextTo.isFocused())
+                BackSpaceA(editTextTo);
+        }
+    };
+
+    private void CleanA(EditText ed) {
+        ed.setText("0.0");
+    }
+
+    View.OnClickListener cleanListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (editTextFrom.isFocused())
+                CleanA(editTextFrom);
+            if (editTextTo.isFocused())
+                CleanA(editTextTo);
+        }
+    };
+    View.OnClickListener upListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            editTextFrom.requestFocus();
+            editTextFrom.setSelection(editTextFrom.getText().toString().length());
+        }
+    };
+    View.OnClickListener downListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            editTextTo.requestFocus();
+            editTextTo.setSelection(editTextTo.getText().toString().length());
+        }
+    };
+    View.OnClickListener keyboard = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (v instanceof Button){
+                Button button = (Button) v;
+                if (editTextFrom.isFocused())
+                    updateText(button.getText().toString(),editTextFrom);
+                if (editTextTo.isFocused())
+                    updateText(button.getText().toString(),editTextTo);
+            }
+        }
+    };
 
 }

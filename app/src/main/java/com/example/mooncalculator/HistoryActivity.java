@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
@@ -64,11 +65,11 @@ public class HistoryActivity extends AppCompatActivity {
         });
         sharedPreferences = getSharedPreferences(Statics.SPName,MODE_PRIVATE);
 
-        //set some ex
-        Statics.saveExpression(sharedPreferences,"fati");
-        Statics.saveExpression(sharedPreferences,"ali");
-        Statics.saveExpression(sharedPreferences,"123");
-        Statics.saveExpression(sharedPreferences,"1233");
+//        //set some ex
+//        Statics.saveExpression(sharedPreferences,"fati");
+//        Statics.saveExpression(sharedPreferences,"ali");
+//        Statics.saveExpression(sharedPreferences,"123");
+//        Statics.saveExpression(sharedPreferences,"1233");
 
         data = Statics.getHistoryData(sharedPreferences);
         recyclerView = findViewById(R.id.historyRecyclerView);

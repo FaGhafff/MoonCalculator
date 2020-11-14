@@ -31,6 +31,7 @@
             android:minHeight="?attr/actionBarSize"
             app:layout_constraintTop_toTopOf="parent"
             app:title=""
+            app:menu="@menu/switch_menu"
             tools:layout_editor_absoluteX="0dp">
 
         </androidx.appcompat.widget.Toolbar>

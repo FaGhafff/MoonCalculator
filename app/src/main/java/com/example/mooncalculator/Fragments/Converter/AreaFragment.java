@@ -86,7 +86,6 @@ public class AreaFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_area, container, false);
 
-
         //keyboard
         Button OneBTN = view.findViewById(R.id.OneBtnA);
         OneBTN.setOnClickListener(keyboard);
@@ -108,16 +107,17 @@ public class AreaFragment extends Fragment {
         NineBTN.setOnClickListener(keyboard);
         Button zero = view.findViewById(R.id.ZeroBtnA);
         zero.setOnClickListener(keyboard);
-        Button ClearBtn = view.findViewById(R.id.ClearBtnA);
-        ClearBtn.setOnClickListener(keyboard);
-        ImageButton backSpaceBTN = view.findViewById(R.id.BackSpaceBtnA);
-        backSpaceBTN.setOnClickListener(keyboard);
-        ImageButton up = view.findViewById(R.id.UpBtnA);
-        up.setOnClickListener(keyboard);
-        ImageButton down = view.findViewById(R.id.DownBtnA);
-        down.setOnClickListener(keyboard);
         Button dot = view.findViewById(R.id.DotBtnA);
         dot.setOnClickListener(keyboard);
+
+        Button ClearBtn = view.findViewById(R.id.ClearBtnA);
+        ClearBtn.setOnClickListener(cleanListener);
+        ImageButton backSpaceBTN = view.findViewById(R.id.BackSpaceBtnA);
+        backSpaceBTN.setOnClickListener(backSpaceListener);
+        ImageButton up = view.findViewById(R.id.UpBtnA);
+        up.setOnClickListener(upListener);
+        ImageButton down = view.findViewById(R.id.DownBtnA);
+        down.setOnClickListener(downListener);
 
 
         //init
@@ -130,27 +130,11 @@ public class AreaFragment extends Fragment {
         //editTextFrom
         editTextFrom.addTextChangedListener(textWatcherFrom);
         editTextFrom.setShowSoftInputOnFocus(false);
-        editTextFrom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (getString(R.string._0).equals(editTextFrom.getText().toString())) {
-                    editTextFrom.setText("");
-                }
-            }
-        });
-
+        editTextFrom.requestFocus();
 
         //editTextTo
         editTextTo.addTextChangedListener(textWatcherTo);
         editTextTo.setShowSoftInputOnFocus(false);
-        editTextTo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(getString(R.string._0).equals(editTextTo.getText().toString())){
-                    editTextTo.setText("");
-                }
-            }
-        });
 
         //from
         String[] fromArray = getResources().getStringArray(R.array.Area);
@@ -161,7 +145,6 @@ public class AreaFragment extends Fragment {
         String selectedFrom = spinnerFrom.getSelectedItem().toString();
         from = Core.Area.getEnum(delUnit(selectedFrom));
 
-
         //to
         String[] toArray = getResources().getStringArray(R.array.Area);
         ArrayAdapter<String> adapterTor = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, toArray);
@@ -170,12 +153,6 @@ public class AreaFragment extends Fragment {
         spinnerTo.setAdapter(adapterTor);
         String selectedTo = spinnerTo.getSelectedItem().toString();
         to = Core.Area.getEnum(delUnit(selectedTo));
-
-
-        //setFocus
-         editTextFrom.requestFocus();
-
-
 
         // Inflate the layout for this fragment
         return view;
@@ -187,7 +164,6 @@ public class AreaFragment extends Fragment {
             String string = adapterView.getItemAtPosition(i).toString();
             from = Core.Area.getEnum(delUnit(string));
             System.out.println(string);
-            Toast.makeText(getContext(), string + " OIS from", Toast.LENGTH_SHORT).show();
             updateValues(editTextTo, to, editTextFrom, from, false);
         }
 
@@ -201,7 +177,6 @@ public class AreaFragment extends Fragment {
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
             String string = adapterView.getItemAtPosition(i).toString();
             to = Core.Area.getEnum(delUnit(string));
-            Toast.makeText(getContext(), string + " OIS to", Toast.LENGTH_SHORT).show();
             updateValues(editTextFrom, from, editTextTo, to, false);
         }
 
@@ -246,7 +221,7 @@ public class AreaFragment extends Fragment {
         }
     };
 
-    private void updateValues(@NotNull EditText source, Core.Area from,EditText destination, Core.Area to, boolean canBeInfinity) {
+    private void updateValues(@NotNull EditText source, Core.Area from, EditText destination, Core.Area to, boolean canBeInfinity) {
         if (source.isFocused() || !canBeInfinity) {
             double doubleForm = 0;
             try {
@@ -267,17 +242,7 @@ public class AreaFragment extends Fragment {
         // todo : clean this shits
     }
 
-
-    View.OnClickListener keyboard = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Button button = (Button) v;
-
-
-        }
-    };
-
-    private void BackSpaceA (EditText ed){
+    private void BackSpaceA(EditText ed) {
         int cursorPos = ed.getSelectionStart();
         int textlen = ed.getText().length();
         if (cursorPos != 0 && textlen != 0) {
@@ -285,9 +250,23 @@ public class AreaFragment extends Fragment {
             selection.replace(cursorPos - 1, cursorPos, "");
             ed.setText(selection);
             ed.setSelection(cursorPos - 1);
+        }
     }
-}
-    View.OnClickListener backspaceListener = new View.OnClickListener() {
+
+    private void updateText(String strToAdd,EditText display) {
+        String oldStr = display.getText().toString();
+        int cursorPos = display.getSelectionStart();
+        String leftStr = oldStr.substring(0, cursorPos);
+        String rightStr = oldStr.substring(cursorPos);
+        if (getString(R.string.display).equals(display.getText().toString()) || display.getText().toString().equals("0.0")) {
+            display.setText(strToAdd);
+        } else {
+            display.setText(String.format("%s%s%s", leftStr, strToAdd, rightStr));
+        }
+        display.setSelection(cursorPos + strToAdd.length());
+    }
+
+    View.OnClickListener backSpaceListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             if (editTextFrom.isFocused())
@@ -297,10 +276,11 @@ public class AreaFragment extends Fragment {
         }
     };
 
-    private void CleanA(EditText ed){
-        ed.setText("");
+    private void CleanA(EditText ed) {
+        ed.setText("0.0");
     }
-    View.OnClickListener CleanListiner = new View.OnClickListener() {
+
+    View.OnClickListener cleanListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             if (editTextFrom.isFocused())
@@ -309,17 +289,30 @@ public class AreaFragment extends Fragment {
                 CleanA(editTextTo);
         }
     };
-    View.OnClickListener UpListener = new View.OnClickListener() {
+    View.OnClickListener upListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             editTextFrom.requestFocus();
+            editTextFrom.setSelection(editTextFrom.getText().toString().length());
         }
     };
     View.OnClickListener downListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             editTextTo.requestFocus();
-
+            editTextTo.setSelection(editTextTo.getText().toString().length());
+        }
+    };
+    View.OnClickListener keyboard = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+        if (v instanceof Button){
+            Button button = (Button) v;
+            if (editTextFrom.isFocused())
+                updateText(button.getText().toString(),editTextFrom);
+        if (editTextTo.isFocused())
+                updateText(button.getText().toString(),editTextTo);
+        }
         }
     };
 }

@@ -3,6 +3,8 @@ package com.example.mooncalculator;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -12,9 +14,12 @@ import org.mariuszgromada.math.mxparser.*;
 
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.mooncalculator.Fragments.Main.BasicFragment;
 import com.example.mooncalculator.Fragments.Main.EquationFragment;
@@ -31,9 +36,28 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle toggle;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    String Npi = "3.14159265";
+    private SwitchCompat switchCompat;
 
-    //todo make best structure for navigation menu with static class and inheritance
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.switch_menu, menu);
+
+        MenuItem item = menu.findItem(R.id.myswitch);
+        item.setActionView(R.layout.switch_layout);
+
+        switchCompat = item.getActionView().findViewById(R.id.switchAB);
+
+        switchCompat.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (b)
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            else
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+        });
+
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +66,11 @@ public class MainActivity extends AppCompatActivity {
         //toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //switch
+        
+
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES)
+            Toast.makeText(this, "Fuck you", Toast.LENGTH_SHORT).show();
         //drawer
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.nav_view);
@@ -63,7 +92,13 @@ public class MainActivity extends AppCompatActivity {
         SmartTabLayout viewPagerTab = (SmartTabLayout) findViewById(R.id.viewPagerTabMain);
         viewPagerTab.setViewPager(viewPager);
 
-
+//        SwitchCompat switchCompat = findViewById(R.id.switchAB);
+//        if (switchCompat.isChecked()||AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//        switchCompat.setChecked(true);}
+//        else {
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//        switchCompat.setChecked(false);}
         //calculator
         display = findViewById(R.id.input);
         display.setShowSoftInputOnFocus(false);
@@ -173,7 +208,6 @@ public class MainActivity extends AppCompatActivity {
             display.setText(String.format("%s%s%s", leftStr, strToAdd, rightStr));
         }
         display.setSelection(cursorPos + strToAdd.length());
-
     }
 
     public void ZeroBTN(View view) {

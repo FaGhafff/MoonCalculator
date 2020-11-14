@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.mooncalculator.Fragments.Converter.AreaFragment;
 import com.example.mooncalculator.Fragments.Converter.DataStorageFragment;
+import com.example.mooncalculator.Fragments.Converter.NotationFragment;
 import com.example.mooncalculator.Fragments.Converter.TemperatureFragment;
 import com.example.mooncalculator.Fragments.Converter.VolumeFragment;
 import com.example.mooncalculator.Fragments.Converter.LengthFragment;
@@ -57,13 +58,14 @@ public class ConvertorActivity extends AppCompatActivity {
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(
                 getSupportFragmentManager(), FragmentPagerItems.with(this)
                 .add(R.string.areaFragmentTitle, AreaFragment.class)
-//                .add(R.string.dataStorageFragmentTitle, DataStorageFragment.class)
-//                .add(R.string.dataTransferRateFragmentTitle, TemperatureFragment.class)
-//                .add(R.string.energyFragmentTitle, VolumeFragment.class)
-//                .add(R.string.lengthFragmentTitle,LengthFragment.class)
-//                .add(R.string.massFragmentTitle,MassFragment.class)
-//                .add(R.string.speedFragmentTitle, SpeedFragment.class)
-//                .add(R.string.timeFragmentTitle, TimeFragment.class)
+                .add(R.string.dataStorageFragmentTitle, DataStorageFragment.class)
+                .add(R.string.dataTransferRateFragmentTitle, TemperatureFragment.class)
+                .add(R.string.energyFragmentTitle, VolumeFragment.class)
+                .add(R.string.lengthFragmentTitle,LengthFragment.class)
+                .add(R.string.massFragmentTitle,MassFragment.class)
+                .add(R.string.speedFragmentTitle, SpeedFragment.class)
+                .add(R.string.timeFragmentTitle, TimeFragment.class)
+                .add(R.string.notationFragmentTitle, NotationFragment.class)
                 .create());
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewPagerConverter);
