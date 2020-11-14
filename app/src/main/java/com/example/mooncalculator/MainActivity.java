@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
         
 
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES)
-            Toast.makeText(this, "Fuck you", Toast.LENGTH_SHORT).show();
         //drawer
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.nav_view);
