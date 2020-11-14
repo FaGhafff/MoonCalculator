@@ -110,8 +110,6 @@ public class NotationFragment extends Fragment {
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
             String string = adapterView.getItemAtPosition(i).toString();
             from = Core.Notation.getEnum(delUnit(string));
-            System.out.println(string);
-            Toast.makeText(getContext(), string + " OIS from", Toast.LENGTH_SHORT).show();
             updateValues(editTextTo, to, editTextFrom, from, false);
         }
 
@@ -172,13 +170,13 @@ public class NotationFragment extends Fragment {
 
     private void updateValues(@NotNull EditText source, Core.Notation from, EditText destination, Core.Notation to, boolean canBeInfinity) {
         if (source.isFocused() || !canBeInfinity) {
-            double doubleForm = 0;
+            String doubleForm = "";
             try {
-                doubleForm = Double.parseDouble(source.getText().toString());
+                doubleForm = source.getText().toString();
             } catch (NumberFormatException e) {
-                doubleForm = 0;
+                doubleForm = "";
             }
-            String strTo = String.valueOf(core.setInput(doubleForm).from(from).to(to).getOutput());
+            String strTo = String.valueOf(core.setInput(doubleForm).from(from).to(to).getExpression());
             destination.setText(strTo);
         }
     }

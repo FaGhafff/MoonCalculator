@@ -10,14 +10,11 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
-import org.mariuszgromada.math.mxparser.*;
-
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -47,13 +44,19 @@ public class MainActivity extends AppCompatActivity {
         item.setActionView(R.layout.switch_layout);
 
         switchCompat = item.getActionView().findViewById(R.id.switchAB);
+        switchCompat.setChecked(true);
+
+        if (AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES)
+            switchCompat.setChecked(true);
+        else
+            switchCompat.setChecked(false);
 
         switchCompat.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b)
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             else
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+            Toast.makeText(this, "changed", Toast.LENGTH_SHORT).show();
         });
 
         return true;
@@ -66,10 +69,7 @@ public class MainActivity extends AppCompatActivity {
         //toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //switch
-        
 
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES)
         //drawer
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.nav_view);
@@ -91,13 +91,10 @@ public class MainActivity extends AppCompatActivity {
         SmartTabLayout viewPagerTab = (SmartTabLayout) findViewById(R.id.viewPagerTabMain);
         viewPagerTab.setViewPager(viewPager);
 
-//        SwitchCompat switchCompat = findViewById(R.id.switchAB);
-//        if (switchCompat.isChecked()||AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//        switchCompat.setChecked(true);}
-//        else {
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-//        switchCompat.setChecked(false);}
+
+        //switch
+
+
         //calculator
         display = findViewById(R.id.input);
         display.setShowSoftInputOnFocus(false);
