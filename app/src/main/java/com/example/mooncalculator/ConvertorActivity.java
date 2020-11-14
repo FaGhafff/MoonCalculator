@@ -1,5 +1,9 @@
 package com.example.mooncalculator;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -9,19 +13,15 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.Toast;
-
 import com.example.mooncalculator.Fragments.Converter.AreaFragment;
 import com.example.mooncalculator.Fragments.Converter.DataStorageFragment;
-import com.example.mooncalculator.Fragments.Converter.NotationFragment;
-import com.example.mooncalculator.Fragments.Converter.TemperatureFragment;
-import com.example.mooncalculator.Fragments.Converter.VolumeFragment;
 import com.example.mooncalculator.Fragments.Converter.LengthFragment;
 import com.example.mooncalculator.Fragments.Converter.MassFragment;
+import com.example.mooncalculator.Fragments.Converter.NotationFragment;
 import com.example.mooncalculator.Fragments.Converter.SpeedFragment;
+import com.example.mooncalculator.Fragments.Converter.TemperatureFragment;
 import com.example.mooncalculator.Fragments.Converter.TimeFragment;
+import com.example.mooncalculator.Fragments.Converter.VolumeFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
@@ -46,11 +46,7 @@ public class ConvertorActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        navigationView.setNavigationItemSelectedListener(item -> {
 
-            Toast.makeText(this, item.getTitle().toString(), Toast.LENGTH_SHORT).show();
-            return true;
-        });
 
 
 

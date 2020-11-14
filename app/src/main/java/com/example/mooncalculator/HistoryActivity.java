@@ -1,10 +1,17 @@
 package com.example.mooncalculator;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Canvas;
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
@@ -14,21 +21,10 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Canvas;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.Toast;
-
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
@@ -58,19 +54,7 @@ public class HistoryActivity extends AppCompatActivity {
         toggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //fixme no need for NavItemSelectedListener
-        navigationView.setNavigationItemSelectedListener(item -> {
-            Toast.makeText(this, item.getTitle().toString(), Toast.LENGTH_SHORT).show();
-            return true;
-        });
         sharedPreferences = getSharedPreferences(Statics.SPName,MODE_PRIVATE);
-
-//        //set some ex
-//        Statics.saveExpression(sharedPreferences,"fati");
-//        Statics.saveExpression(sharedPreferences,"ali");
-//        Statics.saveExpression(sharedPreferences,"123");
-//        Statics.saveExpression(sharedPreferences,"1233");
-
         data = Statics.getHistoryData(sharedPreferences);
         recyclerView = findViewById(R.id.historyRecyclerView);
         recyclerAdapter = new RecyclerAdapter(data);

@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -123,7 +122,6 @@ public class NotationFragment extends Fragment {
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
             String string = adapterView.getItemAtPosition(i).toString();
             to = Core.Notation.getEnum(delUnit(string));
-            Toast.makeText(getContext(), string + " OIS to", Toast.LENGTH_SHORT).show();
             updateValues(editTextFrom, from, editTextTo, to, false);
         }
 

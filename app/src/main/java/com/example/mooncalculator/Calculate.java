@@ -3,7 +3,6 @@ package com.example.mooncalculator;
 import org.mariuszgromada.math.mxparser.Expression;
 import org.mariuszgromada.math.mxparser.Function;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Calculate {

@@ -1,5 +1,12 @@
 package com.example.mooncalculator;
 
+import android.os.Bundle;
+import android.text.SpannableStringBuilder;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,18 +17,9 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
-import android.os.Bundle;
-import android.text.SpannableStringBuilder;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
-
 import com.example.mooncalculator.Fragments.Main.BasicFragment;
 import com.example.mooncalculator.Fragments.Main.EquationFragment;
 import com.example.mooncalculator.Fragments.Main.ExpertFragment;
-import com.google.android.material.navigation.NavigationView;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
@@ -32,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText display;
     private ActionBarDrawerToggle toggle;
     private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
-    private SwitchCompat switchCompat;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -43,20 +39,13 @@ public class MainActivity extends AppCompatActivity {
         MenuItem item = menu.findItem(R.id.myswitch);
         item.setActionView(R.layout.switch_layout);
 
-        switchCompat = item.getActionView().findViewById(R.id.switchAB);
-        switchCompat.setChecked(true);
-
-        if (AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES)
-            switchCompat.setChecked(true);
-        else
-            switchCompat.setChecked(false);
-
+        SwitchCompat switchCompat = item.getActionView().findViewById(R.id.switchAB);
+        switchCompat.setChecked(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES);
         switchCompat.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b)
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             else
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            Toast.makeText(this, "changed", Toast.LENGTH_SHORT).show();
         });
 
         return true;
@@ -72,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         //drawer
         drawerLayout = findViewById(R.id.drawerLayout);
-        navigationView = findViewById(R.id.nav_view);
+//        NavigationView navigationView = findViewById(R.id.nav_view);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
@@ -98,21 +87,15 @@ public class MainActivity extends AppCompatActivity {
         //calculator
         display = findViewById(R.id.input);
         display.setShowSoftInputOnFocus(false);
-        display.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (getString(R.string.display).equals(display.getText().toString())) {
-                    display.setText("");
-                }
+        display.setOnClickListener(v -> {
+            if (getString(R.string.display).equals(display.getText().toString())) {
+                display.setText("");
             }
         });
         decorView = getWindow().getDecorView();
-        decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
-            @Override
-            public void onSystemUiVisibilityChange(int visibility) {
-                if (visibility == 0)
-                    decorView.setSystemUiVisibility(hideSystemBars());
-            }
+        decorView.setOnSystemUiVisibilityChangeListener(visibility -> {
+            if (visibility == 0)
+                decorView.setSystemUiVisibility(hideSystemBars());
         });
     }
 

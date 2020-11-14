@@ -1,11 +1,6 @@
 package com.example.mooncalculator.Fragments.Converter;
 
-import android.os.Build;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.os.strictmode.WebViewMethodCalledOnWrongThreadViolation;
 import android.text.Editable;
 import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
@@ -18,7 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.mooncalculator.R;
 
