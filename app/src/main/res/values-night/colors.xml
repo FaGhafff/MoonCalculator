@@ -12,7 +12,7 @@
 
     <color name="icon_enabled">#FFFFFFFF</color>
     <color name="icon_disabled">#FF63727B</color>
-    <color name="black20">#33000000</color>
+    <color name="black20">#F4AB41</color>
     <color name="swipeLeftBackground">#BC124B</color>
     <color name="swipeRightBackground">#0FA114</color>
 

@@ -7,16 +7,15 @@
     tools:context=".MainActivity">
 
     <TableLayout
+        android:id="@+id/tableLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        android:id="@+id/tableLayout"
-        android:layout_marginBottom="70dp"
         app:layout_constraintHorizontal_bias="0.6"
-        >
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints">
 
         <TableRow
             android:layout_width="match_parent"
@@ -234,13 +233,13 @@
                 android:id="@+id/DivideByTan"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
-                android:textAllCaps="false"
                 android:layout_height="55sp"
                 android:layout_marginRight="1dp"
                 android:layout_weight="1"
                 android:background="@drawable/buttuns"
                 android:onClick="DivideByTan"
                 android:text="@string/DivideByTan"
+                android:textAllCaps="false"
                 android:textFontWeight="@android:integer/config_longAnimTime"
                 android:textSize="20sp" />
 
@@ -248,7 +247,6 @@
             <Button
                 android:id="@+id/AbsoluteValue"
                 style="@style/Widget.AppCompat.Button.Borderless"
-                android:textAllCaps="false"
                 android:layout_width="0dp"
                 android:layout_height="55sp"
                 android:layout_marginRight="4dp"
@@ -256,6 +254,7 @@
                 android:background="@drawable/buttuns"
                 android:onClick="AbsoluteValue"
                 android:text="@string/AbsoluteValue"
+                android:textAllCaps="false"
                 android:textFontWeight="@android:integer/config_longAnimTime"
                 android:textSize="20sp" />
         </TableRow>

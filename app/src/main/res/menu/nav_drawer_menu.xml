@@ -10,26 +10,24 @@
     <item
         android:id="@+id/converter"
         android:title="Converter"
-        android:onClick="onClickConverter"/>
-    <item
-        android:id="@+id/ourWebsite"
-        android:title="Oue Website"
-        android:onClick="onClickOurWebsite"/>
+        android:onClick="onClickConverter"
+        android:icon="@drawable/ic_baseline_cached_24"/>
+
     <item
         android:id="@+id/history"
         android:title="History"
-        android:onClick="onClickHistory"/>
-    <item
-        android:id="@+id/themes"
-        android:title="Themes"
-        android:onClick="onClickThemes"/>
+        android:onClick="onClickHistory"
+        android:icon="@drawable/ic_baseline_history_24"/>
+
     <item
         android:id="@+id/aboutUs"
         android:title="About us"
-        android:onClick="onClickAboutUs"/>
+        android:onClick="onClickAboutUs"
+        android:icon="@drawable/ic_baseline_info_24"/>
     <item
         android:id="@+id/exit"
         android:title="Exit"
-        android:onClick="onClickExit"/>
+        android:onClick="onClickExit"
+        android:icon="@drawable/ic_baseline_exit_to_app_24"/>
 
 </menu>

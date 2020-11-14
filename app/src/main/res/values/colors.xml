@@ -15,5 +15,5 @@
     <color name="black20">#33000000</color>
     <color name="swipeLeftBackground">#BC124B</color>
     <color name="swipeRightBackground">#2BAA2F</color>
-
+    <item name="vectors" type="color">#171A21</item>
 </resources>
